@@ -1,0 +1,28 @@
+{
+    "name": "aschmelyun/larametrics",
+    "description": "A self-hosted metrics and notifications platform for Laravel apps",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andrew Schmelyun",
+            "email": "me@aschmelyun.com",
+            "homepage": "https://aschmelyun.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Aschmelyun\\Larametrics\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Aschmelyun\\Larametrics\\LarametricsServiceProvider"
+            ]
+        }
+    }
+}
