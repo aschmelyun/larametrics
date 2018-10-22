@@ -28,9 +28,33 @@ After Composer finishes up, you'll have to add the following line to your `confi
 Aschmelyun\Larametrics\LarametricsServiceProvider::class
 ```
 
-Additionally, you'll want to get the config file copied over by running `php artisan vendor:publish --provider="Aschmelyun\Larametrics\LarametricsServiceProvider"` and add in the necessary database structure with `php artisan migrate`. 
+Additionally, you'll want to get the config file copied over and add in the necessary database structure with:
+
+```php
+php artisan vendor:publish --provider="Aschmelyun\Larametrics\LarametricsServiceProvider"
+php artisan migrate
+```
 
 **Note:** Notifications use queued jobs when available to prevent delays in app response time. If you don't have this database table set up already for queues, run `php artisan queue:table && php artisan migrate`. 
+
+## Displaying the Dashboard
+
+Once you have the package tied in to your Laravel app, it starts collecting data based off of the default config file and storing it in your database. In order to view the dashboard associated with Larametrics and analyse your metrics and notifications, you'll need to add in a helper method to your routes file of choice.
+
+```php
+\Aschmelyun\Larametrics\Larametrics::routes();
+```
+
+Include that where (and how) you want the dashboard to appear. For reference, all Larametrics routes are wrapped under a `/metrics` prefix, but you can adjust where you want the routes to appear.
+
+In the following example, the Larametrics dashboard will only be viewable to people who are signed into the application, and visit `/admin/metrics`:
+
+```php
+// routes/web.php
+Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
+    \Aschmelyun\Larametrics\Larametrics::routes();
+});
+```
 
 ## Configuration
 
