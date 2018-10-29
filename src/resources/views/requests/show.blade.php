@@ -34,6 +34,10 @@
                             <td><strong>{{ $request->ip }}</strong></td>
                         </tr>
                         <tr>
+                            <td>User ID</td>
+                            <td><strong>{{ $request->user_id }}</strong></td>
+                        </tr>
+                        <tr>
                             <td>Execution Time</td>
                             <td><strong>{{ floor(($request->end_time - $request->start_time) * 1000) }}ms</strong></td>
                         </tr>
