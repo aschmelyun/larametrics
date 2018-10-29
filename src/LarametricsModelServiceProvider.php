@@ -62,7 +62,7 @@ class LarametricsModelServiceProvider extends ServiceProvider {
                 'model_id' => $event->getAttributes()['id'],
                 'method' => $method,
                 'original' => $method === 'created' ? json_encode($event->getAttributes()) : json_encode($event->getOriginal()),
-                'changes' => $method === 'updated' ? json_encode($event->getChanges()) : '{}'
+                'changes' => $method === 'updated' ? json_encode($event->getDirty()) : '{}'
             ]);
 
             $notifications = LarametricsNotification::where('action', 'model_' . $method)
