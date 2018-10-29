@@ -61,7 +61,7 @@ class LarametricsRouteServiceProvider extends ServiceProvider {
                             'headers' => json_encode($routeMatched->request->header()),
                             'start_time' => LARAVEL_START,
                             'end_time' => microtime(true),
-                            'user' => \Auth::id()
+                            'user_id' => \Auth::id()
                         ]);
                         $done = true;
 
