@@ -18,6 +18,7 @@ class CreateLarametricsRequestsTable extends Migration
             $table->string('method');
             $table->string('uri');
             $table->string('ip')->nullable();
+            $table->integer('user_id')->unsigned()->nullable();
             $table->text('headers')->nullable();
             $table->float('start_time', 16, 4)->nullable();
             $table->float('end_time', 16, 4)->nullable();
