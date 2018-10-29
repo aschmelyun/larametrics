@@ -31,7 +31,7 @@ class LarametricsRouteServiceProvider extends ServiceProvider {
                     //echo 'Terminating: ' . microtime(true);
 
                     $shouldAddRequest = true;
-                    $actions = $routeMatched->route->action;
+                    $actions = $routeMatched->route['action'];
                     if(isset($actions['controller']) && str_contains($actions['controller'], 'Larametrics')) {
                         if(config('larametrics.ignoreLarametricsRequests')) {
                             $shouldAddRequest = false;
