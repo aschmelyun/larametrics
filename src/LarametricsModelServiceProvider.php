@@ -59,7 +59,7 @@ class LarametricsModelServiceProvider extends ServiceProvider {
 
             $larametricsModel = LarametricsModel::create([
                 'model' => get_class($event),
-                'model_id' => $event->getAttributes()['id'],
+                'model_id' => $event->getKey(),
                 'method' => $method,
                 'original' => $method === 'created' ? json_encode($event->getAttributes()) : json_encode($event->getOriginal()),
                 'changes' => $method === 'updated' ? json_encode($event->getDirty()) : '{}'
