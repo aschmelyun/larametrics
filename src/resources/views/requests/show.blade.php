@@ -47,7 +47,7 @@
                         </tr>
                         <tr>
                             <td>Referer</td>
-                            <td><strong>{{ $headers['referer'][0] or '-' }}</strong></td>
+                            <td><strong>{{ array_key_exists('referer', $headers) ? $headers['referer'][0] : 'Not Provided' }}</strong></td>
                         </tr>
                     </tbody>
                 </table>
