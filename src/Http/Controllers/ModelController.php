@@ -3,7 +3,7 @@
 namespace Aschmelyun\Larametrics\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controller;
 use Aschmelyun\Larametrics\LogParser;
 use Aschmelyun\Larametrics\Models\LarametricsModel;
 use DB;
