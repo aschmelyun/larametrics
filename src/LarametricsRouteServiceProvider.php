@@ -21,15 +21,9 @@ class LarametricsRouteServiceProvider extends ServiceProvider {
     {
         if(config('larametrics.requestsWatched')) {
             Route::matched(function($routeMatched) {
-                //dd($routeMatched->route);
-                //echo 'Laravel started: ' . LARAVEL_START;
-                //echo 'Route matched: ' . microtime(true);
 
                 $done = false;
                 $this->app->terminating(function () use($routeMatched, $done) {
-                    //$executionTime = floor((microtime(true) - LARAVEL_START) * 1000);
-                    //echo 'Execution time: ' . $executionTime . 'ms';
-                    //echo 'Terminating: ' . microtime(true);
 
                     $shouldAddRequest = true;
                     $actions = $routeMatched->route->getAction();
