@@ -2,7 +2,7 @@
 
 [![Current Version](https://img.shields.io/packagist/v/aschmelyun/larametrics.svg?style=flat-square)](https://packagist.org/packages/aschmelyun/larametrics)
 ![License](https://img.shields.io/github/license/aschmelyun/larametrics.svg?style=flat-square)
-[![Build Status](https://img.shields.io/travis/aschmelyun/larametrics/master.svg?style=flat-square)](https://travis-ci.org/spatie/laravel-view-models)
+[![Build Status](https://img.shields.io/travis/aschmelyun/larametrics/master.svg?style=flat-square)](https://travis-ci.org/aschmelyun/larametrics)
 [![Total Downloads](https://img.shields.io/packagist/dt/aschmelyun/larametrics.svg?style=flat-square)](https://packagist.org/packages/aschmelyun/larametrics)
 
 A self-hosted metrics and notifications platform for Laravel apps, Larametrics records and notifies you of changes made to models, incoming requests, and messages written to the log.
