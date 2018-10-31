@@ -1,5 +1,6 @@
 # Larametrics
 
+[![Current Version](https://img.shields.io/packagist/v/aschmelyun/larametrics.svg?style=flat-square)](https://packagist.org/packages/aschmelyun/larametrics)
 ![License](https://img.shields.io/github/license/aschmelyun/larametrics.svg?style=flat-square)
 [![Build Status](https://img.shields.io/travis/aschmelyun/larametrics/master.svg?style=flat-square)](https://travis-ci.org/spatie/laravel-view-models)
 [![Total Downloads](https://img.shields.io/packagist/dt/aschmelyun/larametrics.svg?style=flat-square)](https://packagist.org/packages/aschmelyun/larametrics)
