@@ -42,12 +42,12 @@ class LarametricsModelServiceProvider extends ServiceProvider {
                 $method = 'created';
             }
 
-            if(config('larametrics.modelsWatchedExpireDays') !== '0') {
+            if(config('larametrics.modelsWatchedExpireDays') !== 0) {
                 $expiredModels = LarametricsModel::where('created_at', '<', Carbon::now()->subDays(config('larametrics.modelsWatchedExpireDays'))->toDateTimeString())
                     ->delete();
             }
             
-            if(config('larametrics.modelsWatchedExpireAmount') !== '0') {
+            if(config('larametrics.modelsWatchedExpireAmount') !== 0) {
                 $expiredModels = LarametricsModel::orderBy('created_at', 'desc')
                     ->offset(config('larametrics.modelsWatchedExpireAmount'))
                     ->limit(config('larametrics.modelsWatchedExpireAmount'))
