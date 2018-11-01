@@ -20,12 +20,12 @@ class LarametricsLogServiceProvider extends ServiceProvider {
         Event::listen(MessageLogged::class, function(MessageLogged $e) {
             try {
                 
-                if(config('larametrics.logsWatchedExpireDays') !== '0') {
+                if(config('larametrics.logsWatchedExpireDays') !== 0) {
                     $expiredLogs = LarametricsLog::where('created_at', '<', Carbon::now()->subDays(config('larametrics.logsWatchedExpireDays'))->toDateTimeString())
                         ->delete();
                 }
                 
-                if(config('larametrics.logsWatchedExpireAmount') !== '0') {
+                if(config('larametrics.logsWatchedExpireAmount') !== 0) {
                     $expiredLogs = LarametricsLog::orderBy('created_at', 'desc')
                         ->offset(config('larametrics.logsWatchedExpireAmount'))
                         ->limit(config('larametrics.logsWatchedExpireAmount'))
