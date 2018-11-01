@@ -11,6 +11,7 @@ use Illuminate\Log\Events\MessageLogged;
 use Aschmelyun\Larametrics\Models\LarametricsLog;
 use Aschmelyun\Larametrics\Models\LarametricsNotification;
 use Aschmelyun\Larametrics\Notifications\LogWritten;
+use Carbon\Carbon;
 
 class LarametricsLogServiceProvider extends ServiceProvider {
 
