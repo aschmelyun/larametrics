@@ -38,12 +38,12 @@ class LarametricsRouteServiceProvider extends ServiceProvider {
                         }
                     }
 
-                    if(config('larametrics.requestsWatchedExpireDays') !== '0') {
+                    if(config('larametrics.requestsWatchedExpireDays') !== 0) {
                         $expiredModels = LarametricsRequest::where('created_at', '<', Carbon::now()->subDays(config('larametrics.requestsWatchedExpireDays'))->toDateTimeString())
                             ->delete(); 
                     }
 
-                    if(config('larametrics.requestsWatchedExpireAmount') !== '0') {
+                    if(config('larametrics.requestsWatchedExpireAmount') !== 0) {
                         $expiredModels = LarametricsRequest::orderBy('created_at', 'desc')
                             ->offset(config('larametrics.requestsWatchedExpireAmount'))
                             ->limit(config('larametrics.requestsWatchedExpireAmount'))
