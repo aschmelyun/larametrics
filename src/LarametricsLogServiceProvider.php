@@ -17,56 +17,58 @@ class LarametricsLogServiceProvider extends ServiceProvider {
     public function boot()
     {
         Event::listen(MessageLogged::class, function(MessageLogged $e) {
-            try {
-                $larametricsLog = LarametricsLog::create([
-                    'level' => $e->level,
-                    'message' => $e->message,
-                    'user_id' => count($e->context) ? $e->context['userId'] : null,
-                    'email' => count($e->context) ? $e->context['email'] : null,
-                    'trace' => count($e->context) ? json_encode($e->context['exception']->getTrace()) : '[]'
-                ]);
+            if (config('larametrics.logsWatched') === true) {
+                try {
+                    $larametricsLog = LarametricsLog::create([
+                        'level' => $e->level,
+                        'message' => $e->message,
+                        'user_id' => count($e->context) ? $e->context['userId'] : null,
+                        'email' => count($e->context) ? $e->context['email'] : null,
+                        'trace' => count($e->context) ? json_encode($e->context['exception']->getTrace()) : '[]'
+                    ]);
 
-                $logLevel = 'notice';
-                $notificationLevels = array(
-                    'error' => [
-                        'emergency',
-                        'alert',
-                        'critical',
-                        'error'
-                    ],
-                    'notice' => [
-                        'warning',
-                        'notice'
-                    ],
-                    'debug' => [
-                        'info',
-                        'debug'
-                    ]
-                );
+                    $logLevel = 'notice';
+                    $notificationLevels = array(
+                        'error' => [
+                            'emergency',
+                            'alert',
+                            'critical',
+                            'error'
+                        ],
+                        'notice' => [
+                            'warning',
+                            'notice'
+                        ],
+                        'debug' => [
+                            'info',
+                            'debug'
+                        ]
+                    );
 
-                foreach($notificationLevels as $triggerLevel => $childLevels) {
-                    if(in_array($e->level, $childLevels)) {
-                        $logLevel = $triggerLevel;
+                    foreach($notificationLevels as $triggerLevel => $childLevels) {
+                        if(in_array($e->level, $childLevels)) {
+                            $logLevel = $triggerLevel;
+                        }
                     }
-                }
 
-                $notifications = LarametricsNotification::where('action', 'logged_' . $logLevel)
-                    ->get();
+                    $notifications = LarametricsNotification::where('action', 'logged_' . $logLevel)
+                        ->get();
 
-                foreach($notifications as $index => $notification) {
-                    if($notification->filter !== '*' && !str_contains($e->message, $notification->filter)) {
-                        unset($notifications[$index]);
+                    foreach($notifications as $index => $notification) {
+                        if($notification->filter !== '*' && !str_contains($e->message, $notification->filter)) {
+                            unset($notifications[$index]);
+                        }
                     }
-                }
 
-                if(count($notifications)) {
-                    foreach($notifications as $notification) {
-                        Notification::send($notification, new LogWritten($larametricsLog));
+                    if(count($notifications)) {
+                        foreach($notifications as $notification) {
+                            Notification::send($notification, new LogWritten($larametricsLog));
+                        }
                     }
-                }
 
-            } catch(\Exception $e) {
-                // fail silently
+                } catch(\Exception $e) {
+                    // fail silently
+                }
             }
         });
     }
