@@ -11,14 +11,30 @@ use Illuminate\Log\Events\MessageLogged;
 use Aschmelyun\Larametrics\Models\LarametricsLog;
 use Aschmelyun\Larametrics\Models\LarametricsNotification;
 use Aschmelyun\Larametrics\Notifications\LogWritten;
+use Carbon\Carbon;
 
 class LarametricsLogServiceProvider extends ServiceProvider {
 
     public function boot()
     {
         Event::listen(MessageLogged::class, function(MessageLogged $e) {
+
             if (config('larametrics.logsWatched') === true) {
                 try {
+                    if(config('larametrics.logsWatchedExpireDays') !== 0) {
+                        $expiredLogs = LarametricsLog::where('created_at', '<', Carbon::now()->subDays(config('larametrics.logsWatchedExpireDays'))->toDateTimeString())
+                            ->delete();
+                    }
+
+                    if(config('larametrics.logsWatchedExpireAmount') !== 0) {
+                        $expiredLogs = LarametricsLog::orderBy('created_at', 'desc')
+                            ->offset(config('larametrics.logsWatchedExpireAmount'))
+                            ->limit(config('larametrics.logsWatchedExpireAmount'))
+                            ->pluck('id')
+                            ->toArray();
+                         LarametricsLog::destroy($expiredLogs);
+                    }
+
                     $larametricsLog = LarametricsLog::create([
                         'level' => $e->level,
                         'message' => $e->message,

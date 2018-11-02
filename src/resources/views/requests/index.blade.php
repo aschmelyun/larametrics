@@ -3,9 +3,9 @@
 <div class="row row-cards" id="larametricsRequests">
     <div class="col-12">
         <div class="btn-list" style="margin-bottom: 0.75rem;">
-            <a href="#" class="btn btn-secondary" :class="{'disabled': typeof requestsPaginated[page - 1] == 'undefined'}" @click.prevent="page = (page - 1)">Prev</a>
-            <a href="#" class="btn" v-for="n in pageNumbers" v-text="n + 1" :class="{'disabled': page === (n), 'btn-primary': page === (n), 'btn-secondary': page !== (n)}" @click.prevent="page = (n)"></a>
-            <a href="#" class="btn btn-secondary" :class="{'disabled': typeof requestsPaginated[page + 1] == 'undefined'}" @click.prevent="page = (page + 1)">Next</a>
+            <a href="#" :class="{'btn': true, 'btn-secondary': true, 'disabled': typeof requestsPaginated[page - 1] == 'undefined'}" @click.prevent="page = (page - 1)">Prev</a>
+            <a href="#" v-for="n in pageNumbers" v-text="n + 1" :class="{'btn': true, 'disabled': page === (n), 'btn-primary': page === (n), 'btn-secondary': page !== (n)}" @click.prevent="page = (n)"></a>
+            <a href="#" :class="{'btn': true, 'btn-secondary': true, 'disabled': typeof requestsPaginated[page + 1] == 'undefined'}" @click.prevent="page = (page + 1)">Next</a>
         </div>
         <div class="card">
             <div class="card-header">
@@ -37,9 +37,9 @@
             </div>
         </div>
         <div class="btn-list">
-            <a href="#" class="btn btn-secondary" :class="{'disabled': typeof requestsPaginated[page - 1] == 'undefined'}" @click.prevent="page = (page - 1)">Prev</a>
-            <a href="#" class="btn" v-for="n in pageNumbers" v-text="n + 1" :class="{'disabled': page === (n), 'btn-primary': page === (n), 'btn-secondary': page !== (n)}" @click.prevent="page = (n)"></a>
-            <a href="#" class="btn btn-secondary" :class="{'disabled': typeof requestsPaginated[page + 1] == 'undefined'}" @click.prevent="page = (page + 1)">Next</a>
+            <a href="#" :class="{'btn': true, 'btn-secondary': true, 'disabled': typeof requestsPaginated[page - 1] == 'undefined'}" @click.prevent="page = (page - 1)">Prev</a>
+            <a href="#" v-for="n in pageNumbers" v-text="n + 1" :class="{'btn': true, 'disabled': page === (n), 'btn-primary': page === (n), 'btn-secondary': page !== (n)}" @click.prevent="page = (n)"></a>
+            <a href="#" :class="{'btn': true, 'btn-secondary': true, 'disabled': typeof requestsPaginated[page + 1] == 'undefined'}" @click.prevent="page = (page + 1)">Next</a>
         </div>
     </div>
 </div>
