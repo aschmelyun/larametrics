@@ -21,13 +21,13 @@ return [
     | Models Watched - Expire Days
     |--------------------------------------------------------------------------
     |
-    | By default, model changes are stored in the database for 30 days. You 
+    | By default, model changes are stored in the database for 30 days. You
     | can set your own expiration time (in days) here. During each time a change
     | is added to the database, any records older than the expiration time will
-    | be removed. 
+    | be removed.
     |
     */
-    'modelsWatchedExpireDays' => 30,
+    'modelsWatchedExpireDays' => env('MODELS_WATCHED_EXPIRE_DAYS', 30),
 
     /*
     |--------------------------------------------------------------------------
@@ -38,7 +38,7 @@ return [
     | any given time. Set this number to 0 if you would like to have no limit.
     |
     */
-    'modelsWatchedExpireAmount' => 1200,
+    'modelsWatchedExpireAmount' => env('MODELS_WATCHED_EXPIRE_AMOUNT', 1200),
 
     /*
     |--------------------------------------------------------------------------
@@ -50,7 +50,7 @@ return [
     | details will be logged in the larametrics_requests table.
     |
     */
-    'requestsWatched' => false,
+    'requestsWatched' => env('REQUESTS_WATCHED', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -62,7 +62,7 @@ return [
     | creation, any items older than the expiration time will be removed.
     |
     */
-    'requestsWatchedExpireDays' => 10,
+    'requestsWatchedExpireDays' => env('REQUESTS_WATCHED_EXPIRE_DAYS', 10),
 
     /*
     |--------------------------------------------------------------------------
@@ -73,7 +73,7 @@ return [
     | given time. Set this number to 0 if you would like to have no limit.
     |
     */
-    'requestsWatchedExpireAmount' => 10000,
+    'requestsWatchedExpireAmount' => env('REQUESTS_WATCHED_EXPIRE_AMOUNT', 10000),
 
     /*
     |--------------------------------------------------------------------------
@@ -84,7 +84,7 @@ return [
     | will not log requests that are part of the package.
     |
     */
-    'ignoreLarametricsRequests' => true,
+    'ignoreLarametricsRequests' => env('IGNORE_LARAMETRICS_REQUESTS', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -96,7 +96,7 @@ return [
     | If you would like to disable log storage, set this to false.
     |
     */
-    'logsWatched' => true,
+    'logsWatched' => env('LOGS_WATCHED', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -104,12 +104,12 @@ return [
     |--------------------------------------------------------------------------
     |
     | By default, logs  are stored in the database for an unlimited amount
-    | of time. You can set your own expiration time (in days) here. Each 
-    | time a log is added to the database, any records older than the 
-    | expiration time will be removed. 
+    | of time. You can set your own expiration time (in days) here. Each
+    | time a log is added to the database, any records older than the
+    | expiration time will be removed.
     |
     */
-    'logsWatchedExpireDays' => 0,
+    'logsWatchedExpireDays' => env('LOGS_WATCHED_EXPIRE_DAYS', 10),
 
     /*
     |--------------------------------------------------------------------------
@@ -120,7 +120,7 @@ return [
     | given time. Change this number if you would prefer there to be a limit.
     |
     */
-    'logsWatchedExpireAmount' => 0,
+    'logsWatchedExpireAmount' => env('LOGS_WATCHED_EXPIRE_AMOUNT', 10),
 
     /*
     |--------------------------------------------------------------------------
@@ -130,7 +130,7 @@ return [
     | If this is set to true, the main navigation for Larametrics will hide
     | the links for items (models, requests, logs) that are not being watched.
     */
-    'hideUnwatchedMenuItems' => true,
+    'hideUnwatchedMenuItems' => env('HIDE_UNWATCHED_MENU_ITEMS', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -144,7 +144,7 @@ return [
     | 'slack' should be a Slack Webhook URL ready to receive messages
     */
     'notificationMethods' => [
-        'email' => env('LARAMETRICS_NOTIFICATION_EMAIL', 'admin@localhost'),
+        'email' => env('LARAMETRICS_NOTIFICATION_EMAIL', 'admin@admin.com'),
         'slack' => env('LARAMETRICS_NOTIFICATION_SLACK_WEBHOOK', '')
     ]
 
