@@ -13,7 +13,13 @@ class LarametricsServiceProvider extends ServiceProvider {
 
     public function boot()
     {
-        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
+        if(method_exists($this, 'loadMigrationsFrom')) {
+            $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
+        } else {
+            $this->publishes([
+                __DIR__ . '/database/migrations/' => database_path('migrations')
+            ], 'migrations');
+        }
 
         $this->publishes([
             __DIR__ . '/config/larametrics.php' => config_path('larametrics.php'),
