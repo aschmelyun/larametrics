@@ -82,4 +82,9 @@ class LarametricsModelServiceProvider extends ServiceProvider {
         });
     }
 
+    public function register()
+    {
+        
+    }
+
 }
