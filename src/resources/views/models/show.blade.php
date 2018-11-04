@@ -8,7 +8,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">ID: {{ $original['id'] }} - {{ ucwords($model->method) }} on {{ $model->created_at }}</h3>
+                <h3 class="card-title">ID: {{ $original[$modelPrimaryKey] }} - {{ ucwords($model->method) }} on {{ $model->created_at }}</h3>
             </div>
             @if($changes && count($changes))
                 <div class="card-body">

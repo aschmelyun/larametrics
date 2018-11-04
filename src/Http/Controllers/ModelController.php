@@ -43,9 +43,13 @@ class ModelController extends Controller
     {
         if(is_numeric($model)) {
             $larametricsModel = LarametricsModel::find($model);
+
+            $modelPrimaryKey = (new $larametricsModel->model)->getKeyName();
+
             return view('larametrics::models.show', [
                 'model' => $larametricsModel,
-                'pageTitle' => $larametricsModel->model
+                'pageTitle' => $larametricsModel->model,
+                'modelPrimaryKey' => $modelPrimaryKey
             ]);
         } else {
             $appModel = str_replace('+', '\\', $model);
@@ -57,10 +61,13 @@ class ModelController extends Controller
             $earliestModel = LarametricsModel::orderBy('created_at', 'desc')
                 ->first();
 
+            $modelPrimaryKey = (new $appModel)->getKeyName();
+
             return view('larametrics::models.model', [
                 'models' => $models,
                 'pageTitle' => $appModel,
-                'watchLength' => $earliestModel ? $earliestModel->created_at->diffInDays(Carbon::now()) : 0
+                'watchLength' => $earliestModel ? $earliestModel->created_at->diffInDays(Carbon::now()) : 0,
+                'modelPrimaryKey' => $modelPrimaryKey
             ]);
         }
     }

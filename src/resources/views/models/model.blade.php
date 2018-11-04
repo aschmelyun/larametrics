@@ -31,7 +31,7 @@
                             <tr>
                                 <td><i class="fe {{ $methodClass }}"></i></td>
                                 <td>{{ ucwords($model->method) }}</td>
-                                <td>{{ json_decode($model->original, true)['id'] }}</td>
+                                <td>{{ json_decode($model->original, true)[$modelPrimaryKey] }}</td>
                                 <td>{{ $model->created_at }}</td>
                                 <td>
                                     @php
