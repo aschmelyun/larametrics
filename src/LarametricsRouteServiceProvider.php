@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Http\Request;
 use Aschmelyun\Larametrics\Models\LarametricsNotification;
 use Aschmelyun\Larametrics\Models\LarametricsRequest;
 use Aschmelyun\Larametrics\Notifications\RouteRequested;
@@ -20,15 +21,9 @@ class LarametricsRouteServiceProvider extends ServiceProvider {
     {
         if(config('larametrics.requestsWatched')) {
             Route::matched(function($routeMatched) {
-                //dd($routeMatched);
-                //echo 'Laravel started: ' . LARAVEL_START;
-                //echo 'Route matched: ' . microtime(true);
-                
+
                 $done = false;
                 $this->app->terminating(function () use($routeMatched, $done) {
-                    //$executionTime = floor((microtime(true) - LARAVEL_START) * 1000);
-                    //echo 'Execution time: ' . $executionTime . 'ms';
-                    //echo 'Terminating: ' . microtime(true);
 
                     $shouldAddRequest = true;
                     $actions = $routeMatched->route->getAction();
@@ -38,9 +33,18 @@ class LarametricsRouteServiceProvider extends ServiceProvider {
                         }
                     }
 
+                    if ( ! empty( config('larametrics.requestsToSkip') ) ) {
+                        $req = Request::createFromGlobals();
+                        foreach( config('larametrics.requestsToSkip') as $pathToSkip ) {
+                            if ( $req->is($pathToSkip) ) {
+                                $shouldAddRequest = false;
+                            }
+                        }
+                    }
+
                     if(config('larametrics.requestsWatchedExpireDays') !== 0) {
                         $expiredModels = LarametricsRequest::where('created_at', '<', Carbon::now()->subDays(config('larametrics.requestsWatchedExpireDays'))->toDateTimeString())
-                            ->delete(); 
+                            ->delete();
                     }
 
                     if(config('larametrics.requestsWatchedExpireAmount') !== 0) {

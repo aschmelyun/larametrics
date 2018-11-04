@@ -21,10 +21,10 @@ return [
     | Models Watched - Expire Days
     |--------------------------------------------------------------------------
     |
-    | By default, model changes are stored in the database for 30 days. You 
+    | By default, model changes are stored in the database for 30 days. You
     | can set your own expiration time (in days) here. During each time a change
     | is added to the database, any records older than the expiration time will
-    | be removed. 
+    | be removed.
     |
     */
     'modelsWatchedExpireDays' => 30,
@@ -51,6 +51,19 @@ return [
     |
     */
     'requestsWatched' => false,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Requests To Skip
+    |--------------------------------------------------------------------------
+    |
+    | By default, when requestsWatched is enabled, all requests are  watched.
+    | If you would like Larametrics to skip a path you can add it below.
+    |
+    */
+    'requestsToSkip' => [
+        'login'
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -104,9 +117,9 @@ return [
     |--------------------------------------------------------------------------
     |
     | By default, logs  are stored in the database for an unlimited amount
-    | of time. You can set your own expiration time (in days) here. Each 
-    | time a log is added to the database, any records older than the 
-    | expiration time will be removed. 
+    | of time. You can set your own expiration time (in days) here. Each
+    | time a log is added to the database, any records older than the
+    | expiration time will be removed.
     |
     */
     'logsWatchedExpireDays' => 0,
