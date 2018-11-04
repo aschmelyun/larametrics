@@ -31,6 +31,6 @@ class CreateLarametricsNotificationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('larametrics_logs');
+        Schema::dropIfExists('larametrics_notifications');
     }
 }

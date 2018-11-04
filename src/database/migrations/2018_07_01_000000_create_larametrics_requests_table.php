@@ -16,7 +16,7 @@ class CreateLarametricsRequestsTable extends Migration
         Schema::create('larametrics_requests', function (Blueprint $table) {
             $table->increments('id');
             $table->string('method');
-            $table->string('uri');
+            $table->text('uri');
             $table->string('ip')->nullable();
             $table->text('headers')->nullable();
             $table->float('start_time', 16, 4)->nullable();

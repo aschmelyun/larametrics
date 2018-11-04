@@ -1,7 +1,8 @@
 # Larametrics
 
+[![Current Version](https://img.shields.io/packagist/v/aschmelyun/larametrics.svg?style=flat-square)](https://packagist.org/packages/aschmelyun/larametrics)
 ![License](https://img.shields.io/github/license/aschmelyun/larametrics.svg?style=flat-square)
-[![Build Status](https://img.shields.io/travis/aschmelyun/larametrics/master.svg?style=flat-square)](https://travis-ci.org/spatie/laravel-view-models)
+[![Build Status](https://img.shields.io/travis/aschmelyun/larametrics/master.svg?style=flat-square)](https://travis-ci.org/aschmelyun/larametrics)
 [![Total Downloads](https://img.shields.io/packagist/dt/aschmelyun/larametrics.svg?style=flat-square)](https://packagist.org/packages/aschmelyun/larametrics)
 
 A self-hosted metrics and notifications platform for Laravel apps, Larametrics records and notifies you of changes made to models, incoming requests, and messages written to the log.
@@ -64,6 +65,10 @@ There are also two .env variables you'll need to set depending on if you use not
 
 - **LARAMETRICS_NOTIFICATION_EMAIL**, the address that all email notifications will be routed to
 - **LARAMETRICS_NOTIFICATION_SLACK_WEBHOOK**, a Slack webhook configured for receiving requests and adding messages to a specified channel. More info [here](https://get.slack.help/hc/en-us/articles/115005265063-Incoming-WebHooks-for-Slack).
+
+## Difference to Laravel Telescope
+
+In October 2018, Taylor Otwell announced `Laravel Telescope`, which acts as a debugging tool for Laravel applications. For a distinction between `Larametrics` and `Telescope`, please see [this discussion here](https://github.com/aschmelyun/larametrics/issues/11).
 
 ## Contact Info
 

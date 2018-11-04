@@ -7,7 +7,7 @@
                 <h3 class="card-title">All Active Notifications</h3>
             </div>
             <div class="card-body">
-                <div class="row" v-for="(notification, index) in notifications" :class="{'mt-4': index > 0}">
+                <div v-for="(notification, index) in notifications" :class="{'row': true, 'mt-4': index > 0}">
                     <div class="col-sm-4">
                         <div class="input-group">
                             <span class="input-group-prepend" id="action-addon">
