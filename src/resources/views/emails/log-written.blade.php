@@ -69,6 +69,7 @@ background-color: #f6f6f6;
 										{{ $content }}
 									</td>
 								</tr><tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
+										URL: {{ Request::fullUrl() }}<br><br>
                                         Message:<br>
                                         &nbsp;&nbsp;&bull;&nbsp;<strong style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">{{ $requestInfo['message'] }}</strong>
 									</td>
