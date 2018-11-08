@@ -20,7 +20,7 @@
                     </thead>
                     <tbody>
                         @foreach($models as $model)
-                            @php 
+                            @php
                                 $methodClass = 'fe-circle text-info';
                                 if($model->method === 'deleted') {
                                     $methodClass = 'fe-minus-circle text-danger';
@@ -38,7 +38,7 @@
                                         $original = json_decode($model->original, true);
                                         $changes = json_decode($model->changes, true);
                                     @endphp
-    
+
                                     @if($model->method === 'created' && count($original))
                                         <pre style="white-space: pre-wrap;line-height:1.5rem">@foreach($original as $column => $data){{ $column }} <span class="text-success">+{{ strlen($data) }}</span><br>@endforeach</pre>
                                     @endif
@@ -53,7 +53,7 @@
 
                                             foreach($changes as $column => $change) {
 
-                                                $changeChars = str_split($change);
+                                                $changeChars = is_array($change) ? str_split($change['date']) : str_split($change);
                                                 $originalChars = str_split($original[$column]);
                                                 $changeNumbers = array(
                                                     'added' => 0,

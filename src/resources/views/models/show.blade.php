@@ -22,7 +22,7 @@
                             <div class="col-sm-6">
                                 <pre style="white-space:normal;line-height:1.5rem;margin:0;">
                                     @php
-                                        $changeChars = str_split($content);
+                                        $changeChars = is_array($content) ? str_split($content['date']) : str_split($content);
                                         $originalChars = str_split($original[$column]);
                                         foreach($originalChars as $index => $char) {
                                             if(isset($changeChars[$index])) {
