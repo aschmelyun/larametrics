@@ -107,7 +107,7 @@
                         </thead>
                         <tbody>
                             @foreach($models as $model)
-                                @php 
+                                @php
                                     $methodClass = 'fe-circle text-info';
                                     if($model->method === 'deleted') {
                                         $methodClass = 'fe-minus-circle text-danger';
@@ -125,14 +125,14 @@
                                             $original = json_decode($model->original, true);
                                             $changes = json_decode($model->changes, true);
                                         @endphp
-        
+
                                         @if($changes && count($changes))
                                             @php
                                                 $changeArray = array();
 
                                                 foreach($changes as $column => $change) {
 
-                                                    $changeChars = str_split($change);
+                                                	$changeChars = is_array($change) ? str_split($change['date']) : str_split($change);
                                                     $originalChars = str_split($original[$column]);
                                                     $changeNumbers = array(
                                                         'added' => 0,
