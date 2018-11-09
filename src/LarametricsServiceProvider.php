@@ -2,22 +2,19 @@
 
 namespace Aschmelyun\Larametrics;
 
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\Event;
-use Aschmelyun\Larametrics\Models\LarametricsModel;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\ServiceProvider;
 
-class LarametricsServiceProvider extends ServiceProvider {
+class LarametricsServiceProvider extends ServiceProvider
+{
 
     public function boot()
     {
-        if(method_exists($this, 'loadMigrationsFrom')) {
+        if (method_exists($this, 'loadMigrationsFrom')) {
             $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
         } else {
             $this->publishes([
-                __DIR__ . '/database/migrations/' => database_path('migrations')
+                __DIR__ . '/database/migrations/' => database_path('migrations'),
             ], 'migrations');
         }
 
@@ -34,7 +31,9 @@ class LarametricsServiceProvider extends ServiceProvider {
 
     public function register()
     {
-        $this->app->singleton(Larametrics::class, function() {
+        require_once __DIR__ . '/helpers.php';
+
+        $this->app->singleton(Larametrics::class, function () {
             return new Larametrics();
         });
 
