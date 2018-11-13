@@ -66,6 +66,21 @@ There are also two .env variables you'll need to set depending on if you use not
 - **LARAMETRICS_NOTIFICATION_EMAIL**, the address that all email notifications will be routed to
 - **LARAMETRICS_NOTIFICATION_SLACK_WEBHOOK**, a Slack webhook configured for receiving requests and adding messages to a specified channel. More info [here](https://get.slack.help/hc/en-us/articles/115005265063-Incoming-WebHooks-for-Slack).
 
+## Roadmap
+Larametrics is still in development, constantly being optimized and attempting to be made compatible for older Laravel versions. Here's what's on the path ahead:
+
+- [x] Add the ability to ignore specific request paths
+- [ ] Integrate Twilio for text message notifications
+- [ ] Integrate Zapier for custom notifications
+- [ ] Move listeners out of root directory and into their own namespace
+- [ ] Optimize database querying for expired models to improve performance
+- [ ] Optimize front-end for mobile devices
+- [ ] Add Artisan commands for displaying Larametrics data
+- [ ] Add watcher for Queues
+- [ ] Add watcher for Scheduled Tasks
+- [ ] Expand on the notification filter options
+- [ ] Compatibility for Laravel 4.2+
+
 ## Difference to Laravel Telescope
 
 In October 2018, Taylor Otwell announced `Laravel Telescope`, which acts as a debugging tool for Laravel applications. For a distinction between `Larametrics` and `Telescope`, please see [this discussion here](https://github.com/aschmelyun/larametrics/issues/11).
