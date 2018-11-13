@@ -79,12 +79,13 @@ class RouteRequested extends Notification implements ShouldQueue
         }
 
         return (new MailMessage)
-                    ->subject('[Larametrics Alert] A route has been requested')
-                    ->view('larametrics::emails.route-requested', [
-                        'requestInfo' => $this->requestInfo,
-                        'content' => $content,
-                        'alertColor' => $alertColor
-                    ]);
+            ->subject(env('LARAMETRICS_ROUTE_SUBJECT', '[Larametrics Alert] A route has been requested'))
+            ->from(env('LARAMETRICS_FROM_EMAIL', 'alerts@larametrics.com'), env('LARAMETRICS_FROM_NAME', 'Larametrics Alerts'))
+            ->view('larametrics::emails.route-requested', [
+                'requestInfo' => $this->requestInfo,
+                'content' => $content,
+                'alertColor' => $alertColor
+            ]);
     }
 
     public function toSlack($notifiable)

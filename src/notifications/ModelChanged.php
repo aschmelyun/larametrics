@@ -72,11 +72,12 @@ class ModelChanged extends Notification implements ShouldQueue
         }
 
         return (new MailMessage)
-                    ->subject('[Larametrics Alert] A model has been ' . $modelInfo['method'])
-                    ->view('larametrics::emails.model-changed', [
-                        'modelInfo' => $modelInfo,
-                        'alertColor' => $alertColor
-                    ]);
+            ->subject(env('LARAMETRICS_MODEL_SUBJECT', '[Larametrics Alert] A model has been ' . $modelInfo['method']))
+            ->from(env('LARAMETRICS_FROM_EMAIL', 'alerts@larametrics.com'), env('LARAMETRICS_FROM_NAME', 'Larametrics Alerts'))
+            ->view('larametrics::emails.model-changed', [
+                'modelInfo' => $modelInfo,
+                'alertColor' => $alertColor
+            ]);
     }
 
     public function toSlack($notifiable)

@@ -115,12 +115,13 @@ class LogWritten extends Notification implements ShouldQueue
         );
 
         return (new MailMessage)
-                    ->subject('[Larametrics Alert] The application log has been written to')
-                    ->view('larametrics::emails.log-written', [
-                        'requestInfo' => $this->requestInfo,
-                        'content' => $content,
-                        'alertColor' => $statusColors[$status]
-                    ]);
+            ->subject(env('LARAMETRICS_LOG_SUBJECT', '[Larametrics Alert] The application log has been written to'))
+            ->from(env('LARAMETRICS_FROM_EMAIL', 'alerts@larametrics.com'), env('LARAMETRICS_FROM_NAME', 'Larametrics Alerts'))
+            ->view('larametrics::emails.log-written', [
+                'requestInfo' => $this->requestInfo,
+                'content' => $content,
+                'alertColor' => $statusColors[$status]
+            ]);
     }
 
     public function toSlack($notifiable)
