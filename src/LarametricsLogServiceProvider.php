@@ -34,13 +34,15 @@ class LarametricsLogServiceProvider extends ServiceProvider {
                      LarametricsLog::destroy($expiredLogs);
                 }
                 
-                $larametricsLog = LarametricsLog::create([
-                    'level' => $e->level,
-                    'message' => $e->message,
-                    'user_id' => count($e->context) ? $e->context['userId'] : null,
-                    'email' => count($e->context) ? $e->context['email'] : null,
-                    'trace' => count($e->context) ? json_encode($e->context['exception']->getTrace()) : '[]'
-                ]);
+                if (config('larametrics.logsWatched')) {
+                    $larametricsLog = LarametricsLog::create([
+                        'level' => $e->level,
+                        'message' => $e->message,
+                        'user_id' => count($e->context) ? $e->context['userId'] : null,
+                        'email' => count($e->context) ? $e->context['email'] : null,
+                        'trace' => count($e->context) ? json_encode($e->context['exception']->getTrace()) : '[]'
+                    ]);
+                }
 
                 $logLevel = 'notice';
                 $notificationLevels = array(
