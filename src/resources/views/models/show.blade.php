@@ -80,11 +80,19 @@
                         <div class="row mb-6">
                             <div class="col-sm-12">
                                 <pre style="white-space:normal;line-height:1.5rem;margin:0;">
-                                    @if($model->method === 'created')
-                                        <span class="text-success">{{ $data }}</span>
-                                    @elseif($model->method === 'deleted')
-                                        <span class="text-danger">{{ $data }}</span>
+                                    @if ($model->method === 'created')
+                                        <span class="text-success">
+                                    @elseif ($model->method === 'deleted')
+                                        <span class="text-danger">
                                     @endif
+                                        @if (!is_array($data))
+                                            {{ $data }}
+                                        @else
+                                            @foreach($data as $key => $value)
+                                                {{ $key }} = {{ $value }} <br/>
+                                            @endforeach
+                                        @endif
+                                    </span>
                                 </pre>
                             </div>
                         </div>

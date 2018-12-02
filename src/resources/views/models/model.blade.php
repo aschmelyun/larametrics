@@ -40,11 +40,23 @@
                                     @endphp
 
                                     @if($model->method === 'created' && count($original))
-                                        <pre style="white-space: pre-wrap;line-height:1.5rem">@foreach($original as $column => $data){{ $column }} <span class="text-success">+{{ strlen($data) }}</span><br>@endforeach</pre>
+                                        <pre style="white-space: pre-wrap;line-height:1.5rem">
+                                            @foreach($original as $column => $data)
+                                                @if (is_string($data))
+                                                    {{ $column }} <span class="text-success">+{{ strlen($data) }}</span><br>
+                                                @endif
+                                            @endforeach
+                                        </pre>
                                     @endif
 
                                     @if($model->method === 'deleted' && count($original))
-                                        <pre style="white-space: pre-wrap;line-height:1.5rem">@foreach($original as $column => $data){{ $column }} <span class="text-danger">-{{ strlen($data) }}</span><br>@endforeach</pre>
+                                        <pre style="white-space: pre-wrap;line-height:1.5rem">
+                                            @foreach($original as $column => $data)
+                                                @if (is_string($data))
+                                                    {{ $column }} <span class="text-danger">-{{ strlen($data) }}</span><br>
+                                                @endif
+                                            @endforeach
+                                        </pre>
                                     @endif
 
                                     @if($changes && count($changes))
