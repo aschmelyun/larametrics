@@ -61,7 +61,7 @@ class LarametricsRouteServiceProvider extends ServiceProvider {
                         $larametricsRequest = LarametricsRequest::create([
                             'method' => $routeMatched->request->getMethod(),
                             'uri' => $routeMatched->request->getRequestUri(),
-                            'ip' => $_SERVER['REMOTE_ADDR'],
+                            'ip' => $routeMatched->request->ip(),
                             'headers' => json_encode($routeMatched->request->header()),
                             'start_time' => LARAVEL_START,
                             'end_time' => microtime(true)
