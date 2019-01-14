@@ -47,7 +47,7 @@
                         </tr>
                         <tr>
                             <td>Referer</td>
-                            <td><strong>{{ $headers['referer'][0] ?: '-' }}</strong></td>
+                            <td><strong>{{ isset($headers['referer']) ? $headers['referer'][0] : '-' }}</strong></td>
                         </tr>
                     </tbody>
                 </table>
