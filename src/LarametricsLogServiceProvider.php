@@ -19,7 +19,7 @@ class LarametricsLogServiceProvider extends ServiceProvider {
     {
         Event::listen(MessageLogged::class, function(MessageLogged $e) {
             try {
-                
+
                 if(config('larametrics.logsWatchedExpireDays') !== 0) {
                     $expiredLogs = LarametricsLog::where('created_at', '<', Carbon::now()->subDays(config('larametrics.logsWatchedExpireDays'))->toDateTimeString())
                         ->delete();
@@ -31,16 +31,16 @@ class LarametricsLogServiceProvider extends ServiceProvider {
                         ->limit(config('larametrics.logsWatchedExpireAmount'))
                         ->pluck('id')
                         ->toArray();
-                     LarametricsLog::destroy($expiredLogs);
+                    LarametricsLog::destroy($expiredLogs);
                 }
-                
+
                 if (config('larametrics.logsWatched')) {
                     $larametricsLog = LarametricsLog::create([
                         'level' => $e->level,
                         'message' => $e->message,
-                        'user_id' => count($e->context) ? $e->context['userId'] : null,
-                        'email' => count($e->context) ? $e->context['email'] : null,
-                        'trace' => count($e->context) ? json_encode($e->context['exception']->getTrace()) : '[]'
+                        'user_id' => isset($e->context['userId']) ? $e->context['userId'] : null,
+                        'email' => isset($e->context['email']) ? $e->context['email'] : null,
+                        'trace' => isset($e->context['exception']) ? json_encode($e->context['exception']->getTrace()) : '[]'
                     ]);
                 }
 
