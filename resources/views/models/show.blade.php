@@ -36,7 +36,7 @@
                                                     }
                                                 }
                                             }
-                                            echo htmlspecialchars($char);
+                                            echo $char;
                                         }
                                     @endphp
                                 </pre>
@@ -56,7 +56,7 @@
                                                     }
                                                 }
                                             }
-                                            echo htmlspecialchars($char);
+                                            echo $char;
                                         }
                                     @endphp
                                 </pre>
