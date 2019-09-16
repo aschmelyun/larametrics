@@ -56,9 +56,9 @@ class SaveLog
                 return LarametricsLog::create([
                     'level' => $this->message->level,
                     'message' => $this->message->message,
-                    'user_id' => count($this->message->context) ? $this->message->context['userId'] : null,
-                    'email' => count($this->message->context) ? $this->message->context['email'] : null,
-                    'trace' => count($this->message->context) ? json_encode($this->message->context['exception']->getTrace()) : '[]'
+                    'user_id' => isset($this->message->context['userId']) ? $this->message->context['userId'] : null,
+                    'email' => isset($this->message->context['email']) ? $this->message->context['email'] : null,
+                    'trace' => isset($this->message->context['exception']) ? json_encode($this->message->context['exception']->getTrace()) : '[]'
                 ]);
             } catch(\Exception $e) {
                 return null;
