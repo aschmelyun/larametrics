@@ -74,7 +74,7 @@ class SaveLog
             ->get();
 
         foreach($notifications as $index => $notification) {
-            if($notification->filter !== '*' && !str_contains($this->message->message, $notification->filter)) {
+            if ($notification->filter !== '*' && !\Str::contains($this->message->message, $notification->filter)) {
                 unset($notifications[$index]);
             }
         }

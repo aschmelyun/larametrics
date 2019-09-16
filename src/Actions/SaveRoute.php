@@ -47,17 +47,9 @@ class SaveRoute
     {
         $actions = $this->route->route->getAction();
 
-        if(function_exists('str_contains')) {
-            if (isset($actions['controller']) && str_contains($actions['controller'], 'Larametrics')) {
-                if (config('larametrics.ignoreLarametricsRequests')) {
-                    return false;
-                }
-            }
-        } else {
-            if (isset($actions['controller']) && \Str::contains($actions['controller'], 'Larametrics')) {
-                if (config('larametrics.ignoreLarametricsRequests')) {
-                    return false;
-                }
+        if (isset($actions['controller']) && \Str::contains($actions['controller'], 'Larametrics')) {
+            if (config('larametrics.ignoreLarametricsRequests')) {
+                return false;
             }
         }
 
@@ -119,14 +111,8 @@ class SaveRoute
                     unset($notifications[$index]);
                 }
             } else {
-                if(function_exists('str_contains')) {
-                    if($notification->filter !== '*' && !str_contains($request->uri, $notification->filter)) {
-                        unset($notifications[$index]);
-                    }
-                } else {
-                    if($notification->filter !== '*' && !\Str::contains($request->uri, $notification->filter)) {
-                        unset($notifications[$index]);
-                    }
+                if($notification->filter !== '*' && !\Str::contains($request->uri, $notification->filter)) {
+                    unset($notifications[$index]);
                 }
             }
         }
