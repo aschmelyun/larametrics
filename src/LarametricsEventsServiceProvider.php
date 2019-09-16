@@ -4,6 +4,7 @@ namespace Aschmelyun\Larametrics;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider;
 use Illuminate\Log\Events\MessageLogged;
+use Illuminate\Routing\Events\RouteMatched;
 use Aschmelyun\Larametrics\Listeners\LogListener;
 use Aschmelyun\Larametrics\Listeners\ModelListener;
 use Aschmelyun\Larametrics\Listeners\RouteListener;
@@ -15,6 +16,9 @@ class LarametricsEventsServiceProvider extends EventServiceProvider
     protected $listen = [
         MessageLogged::class => [
             LogListener::class
+        ],
+        RouteMatched::class => [
+            RouteListener::class
         ]
     ];
 
@@ -27,9 +31,6 @@ class LarametricsEventsServiceProvider extends EventServiceProvider
                 $model::observe(new ModelObserver());
             } catch(\Exception $e) {}
         }
-        // foreach of the config file's models to watch, call $model::observer(new ModelObserver())
-        // the class of the ModelObserver contains two methods, one for saving and one for deleting
-        // would the same event object pull through though?
     }
 
 }
