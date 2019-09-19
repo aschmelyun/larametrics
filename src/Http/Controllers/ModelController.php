@@ -39,8 +39,9 @@ class ModelController extends Controller
         ]);
     }
 
-    public function show($model)
+    public function show(Request $request)
     {
+        $model = $request->route('model');
         if(is_numeric($model)) {
             $larametricsModel = LarametricsModel::find($model);
 
