@@ -119,7 +119,7 @@
                                     <td><i class="fe {{ $methodClass }}"></i></td>
                                     <td>{{ ucwords($model->method) }}</td>
                                     <td>{{ $model->created_at }}</td>
-                                    <td><strong>{{ $model->model . ' #' . json_decode($model->original, true)['id'] }}</strong></td>
+                                    <td><strong>{{ $model->model . ' #' . json_decode($model->original, true)[app($model->model)->getKeyName()] }}</strong></td>
                                     <td>
                                         @php
                                             $original = json_decode($model->original, true);
