@@ -13,6 +13,7 @@
                             <th></th>
                             <th>Method</th>
                             <th>ID</th>
+                            <th>Made By</th>
                             <th>Timestamp</th>
                             <th>Changes</th>
                             <th></th>
@@ -32,6 +33,7 @@
                                 <td><i class="fe {{ $methodClass }}"></i></td>
                                 <td>{{ ucwords($model->method) }}</td>
                                 <td>{{ json_decode($model->original, true)[$modelPrimaryKey] }}</td>
+                                <td>{{ $model->user_id ? 'User #' . $model->user_id : 'N/A' }}</td>
                                 <td>{{ $model->created_at }}</td>
                                 <td>
                                     @php

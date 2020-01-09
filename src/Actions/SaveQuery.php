@@ -64,6 +64,7 @@ class SaveQuery
             return LarametricsModel::create([
                 'model' => get_class($this->model),
                 'model_id' => $this->model->getKey(),
+                'user_id' => \Auth::user() ? \Auth::user()->id : null,
                 'method' => $this->method,
                 'original' => $this->method === 'created' ? json_encode($this->model->getAttributes()) : json_encode($this->model->getOriginal()),
                 'changes' => $this->method === 'updated' ? json_encode($this->model->getDirty()) : '{}'

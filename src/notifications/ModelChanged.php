@@ -65,7 +65,8 @@ class ModelChanged extends Notification implements ShouldQueue
             'model' => $this->larametricsModel->model,
             'method' => $this->larametricsModel->method,
             'original' => json_decode($this->larametricsModel->original, true),
-            'changes' => json_decode($this->larametricsModel->changes, true)
+            'changes' => json_decode($this->larametricsModel->changes, true),
+            'user_id' => $this->larametricsModel->user_id
         );
         $alertColor = '#ff9f00';
         switch($this->larametricsModel->method) {
@@ -92,7 +93,8 @@ class ModelChanged extends Notification implements ShouldQueue
             'id' => $this->larametricsModel->id,
             'model' => $this->larametricsModel->model,
             'original' => json_decode($this->larametricsModel->original, true),
-            'changes' => json_decode($this->larametricsModel->changes, true)
+            'changes' => json_decode($this->larametricsModel->changes, true),
+            'user_id' => $this->larametricsModel->user_id
         );
         
         switch($this->larametricsModel->method) {
@@ -135,7 +137,8 @@ class ModelChanged extends Notification implements ShouldQueue
             'model' => $this->larametricsModel->model,
             'method' => $this->larametricsModel->method,
             'original' => json_decode($this->larametricsModel->original, true),
-            'changes' => json_decode($this->larametricsModel->changes, true)
+            'changes' => json_decode($this->larametricsModel->changes, true),
+            'user_id' => $this->larametricsModel->user_id
         ];
     }
 
