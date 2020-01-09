@@ -47,7 +47,7 @@ class SaveRoute
     {
         $actions = $this->route->route->getAction();
 
-        if (isset($actions['controller']) && \Str::contains($actions['controller'], 'Larametrics')) {
+        if (isset($actions['controller']) && str_contains($actions['controller'], 'Larametrics')) {
             if (config('larametrics.ignoreLarametricsRequests')) {
                 return false;
             }
@@ -111,7 +111,7 @@ class SaveRoute
                     unset($notifications[$index]);
                 }
             } else {
-                if($notification->filter !== '*' && !\Str::contains($request->uri, $notification->filter)) {
+                if($notification->filter !== '*' && !str_contains($request->uri, $notification->filter)) {
                     unset($notifications[$index]);
                 }
             }

@@ -6,7 +6,6 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider;
 use Illuminate\Log\Events\MessageLogged;
 use Illuminate\Routing\Events\RouteMatched;
 use Aschmelyun\Larametrics\Listeners\LogListener;
-use Aschmelyun\Larametrics\Listeners\ModelListener;
 use Aschmelyun\Larametrics\Listeners\RouteListener;
 use Aschmelyun\Larametrics\Observers\ModelObserver;
 
