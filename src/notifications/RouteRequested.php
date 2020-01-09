@@ -8,6 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Aschmelyun\Larametrics\Models\LarametricsRequest;
+use Aschmelyun\Larametrics\Channels\WebhookChannel;
 
 class RouteRequested extends Notification implements ShouldQueue
 {
@@ -53,7 +54,12 @@ class RouteRequested extends Notification implements ShouldQueue
             case 'email_slack':
                 return ['mail', 'slack'];
             break;
+            case 'webhook':
+                return [WebhookChannel::class];
+            break;
         }
+
+        return [];
     }
 
     /**
@@ -118,6 +124,23 @@ class RouteRequested extends Notification implements ShouldQueue
                         'Execution Time' => $requestInfo['execution_time'] . 'ms'
                     ]);
             });
+    }
+
+    public function toWebhook($notifiable)
+    {
+        $content = 'A route on ' . url('/') . ' was requested.';
+        if($notifiable->filter !== '*' && !is_numeric($notifiable->filter)) {
+            $content .= " You're being notified because the route contains `" . $notifiable->filter . "`";
+        }
+
+        if(is_numeric($notifiable->filter)) {
+            $content .= " You're being notified because the execution time exceeded your limit of " . $notifiable->filter . "ms.";
+        }
+
+        return [
+            'requestInfo' => $this->requestInfo,
+            'content' => $content
+        ];
     }
 
     /**

@@ -158,7 +158,8 @@ return [
     */
     'notificationMethods' => [
         'email' => env('LARAMETRICS_NOTIFICATION_EMAIL', 'admin@localhost'),
-        'slack' => env('LARAMETRICS_NOTIFICATION_SLACK_WEBHOOK', '')
+        'slack' => env('LARAMETRICS_NOTIFICATION_SLACK_WEBHOOK', ''),
+        'webhook' => env('LARAMETRICS_NOTIFICATION_CUSTOM_WEBHOOK', '')
     ]
 
 ];
