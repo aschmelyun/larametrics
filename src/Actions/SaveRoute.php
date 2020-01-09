@@ -16,7 +16,7 @@ class SaveRoute
     private $route;
     private $request;
 
-    public function __construct(RouteMatched $route, Request $request)
+    public function __construct(Request $request, RouteMatched $route = null)
     {
         $this->route = $route;
         $this->request = $request;
@@ -45,7 +45,7 @@ class SaveRoute
 
     public function shouldRequestBeStored()
     {
-        $actions = $this->route->route->getAction();
+        $actions = $this->route ? $this->route->route->getAction() : [];
 
         if (isset($actions['controller']) && str_contains($actions['controller'], 'Larametrics')) {
             if (config('larametrics.ignoreLarametricsRequests')) {
@@ -87,10 +87,10 @@ class SaveRoute
     {
         try {
             return LarametricsRequest::create([
-                'method' => $this->route->request->getMethod(),
-                'uri' => $this->route->request->getRequestUri(),
-                'ip' => $this->route->request->ip(),
-                'headers' => json_encode($this->route->request->header()),
+                'method' => $this->request->getMethod(),
+                'uri' => $this->request->getRequestUri(),
+                'ip' => $this->request->ip(),
+                'headers' => json_encode($this->request->header()),
                 'start_time' => LARAVEL_START,
                 'end_time' => microtime(true)
             ]);

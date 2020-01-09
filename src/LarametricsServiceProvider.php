@@ -2,7 +2,6 @@
 
 namespace Aschmelyun\Larametrics;
 
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 
 class LarametricsServiceProvider extends ServiceProvider

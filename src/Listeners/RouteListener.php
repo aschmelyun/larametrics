@@ -10,7 +10,7 @@ class RouteListener
 
     public function handle(RouteMatched $route)
     {
-        $saveRoute = new SaveRoute($route, app()->request);
+        $saveRoute = new SaveRoute(app()->request, $route);
         $saveRoute->dispatch();
     }
 

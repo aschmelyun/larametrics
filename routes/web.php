@@ -63,4 +63,13 @@ Route::group(['as' => 'larametrics::'], function () {
         'uses' => larametricsUses('NotificationController@update'),
     ]);
 
+    if(config('larametrics.requestsWatched')) {
+
+        Route::any('/{any}', [
+            'as' => 'routes.catch',
+            'uses' => larametricsUses('RouteController@catch')
+        ])->where('any', '.*');
+
+    }
+
 });
