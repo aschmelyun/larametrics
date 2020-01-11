@@ -30,6 +30,8 @@ class SaveLog
         if($createdLog) {
             $this->triggerNotifications($createdLog);
         }
+
+        return $createdLog;
     }
     
     public function checkExpiredLogs()
