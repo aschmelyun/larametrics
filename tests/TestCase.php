@@ -21,8 +21,8 @@ class TestCase extends Orchestra
     protected function getPackageProviders($app)
     {
         return [
-            LarametricsServiceProvider::class,
-            LarametricsEventsServiceProvider::class
+            \Aschmelyun\Larametrics\LarametricsServiceProvider::class,
+            \Aschmelyun\Larametrics\LarametricsEventsServiceProvider::class
         ];
     }
 

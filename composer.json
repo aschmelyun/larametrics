@@ -20,7 +20,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Aschmelyun\\Larametrics\\": "src/"
+            "Aschmelyun\\Larametrics\\": "src"
         }
     },
     "autoload-dev": {
