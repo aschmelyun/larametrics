@@ -5,11 +5,20 @@ namespace Aschmelyun\Larametrics\Tests\Actions;
 use Carbon\Carbon;
 use Aschmelyun\Larametrics\Tests\TestCase;
 use Aschmelyun\Larametrics\Actions\SaveLog;
+use Aschmelyun\Larametrics\Models\LarametricsLog;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Log\Events\MessageLogged;
 
 class SaveLogTest extends TestCase
 {
+
+    /** @test */
+    public function it_provides_a_create_method()
+    {
+        $log = new LarametricsLog();
+
+        $this->assertInstanceOf(LarametricsLog::class, $log);
+    }
 
     /** @test */
     public function it_will_return_a_payload_from_a_log_level_being_watched()

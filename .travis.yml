@@ -7,8 +7,6 @@ php:
   - 7.2
   - 7.3
 
-sudo: false
-
 env:
   matrix:
     - COMPOSER_FLAGS="--prefer-lowest"
@@ -19,4 +17,4 @@ before_script:
   - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-source
 
 script:
-  - vendor/bin/phpunit
+  - phpunit

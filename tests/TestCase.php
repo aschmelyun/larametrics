@@ -4,8 +4,6 @@ namespace Aschmelyun\Larametrics\Tests;
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\File;
-use Aschmelyun\Larametrics\LarametricsServiceProvider;
-use Aschmelyun\Larametrics\LarametricsEventsServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
