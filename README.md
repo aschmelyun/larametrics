@@ -66,19 +66,27 @@ There are also two .env variables you'll need to set depending on if you use not
 - **LARAMETRICS_NOTIFICATION_EMAIL**, the address that all email notifications will be routed to
 - **LARAMETRICS_NOTIFICATION_SLACK_WEBHOOK**, a Slack webhook configured for receiving requests and adding messages to a specified channel. More info [here](https://get.slack.help/hc/en-us/articles/115005265063-Incoming-WebHooks-for-Slack).
 
+Additionally, there's a few other niche variables that you can set specifically for notifications. See a brief description of each below, or a more details on the documentation site.
+
+- **LARAMETRICS_FROM_EMAIL**, the email address that notifications will appear to be sent from
+- **LARAMETRICS_FROM_NAME**, the name that will appear alongside associated email notifications
+- **LARAMETRICS_MODEL_SUBJECT**, the subject of notification emails that arrive when models are created/updated/deleted
+- **LARAMETRICS_LOG_SUBJECT**, the subject of notification emails that arrive when an application log event is recorded
+- **LARAMETRICS_ROUTE_SUBJECT**, the subject of notification emails that arrive when a route has been visited
+
 ## Roadmap
 Larametrics is still in development, constantly being optimized and attempting to be made compatible for older Laravel versions. Here's what's on the path ahead:
 
 - [x] Add the ability to ignore specific request paths
+- [x] Integrate custom webhooks as a notification option
+- [x] Move listeners out of root directory and into their own namespace
+- [x] Optimize front-end for mobile devices
+- [x] Expand on the notification filter options
 - [ ] Integrate Twilio for text message notifications
-- [ ] Integrate Zapier for custom notifications
-- [ ] Move listeners out of root directory and into their own namespace
 - [ ] Optimize database querying for expired models to improve performance
-- [ ] Optimize front-end for mobile devices
 - [ ] Add Artisan commands for displaying Larametrics data
 - [ ] Add watcher for Queues
 - [ ] Add watcher for Scheduled Tasks
-- [ ] Expand on the notification filter options
 - [ ] Compatibility for Laravel 4.2+
 
 ## Difference to Laravel Telescope

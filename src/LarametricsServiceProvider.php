@@ -2,7 +2,6 @@
 
 namespace Aschmelyun\Larametrics;
 
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 
 class LarametricsServiceProvider extends ServiceProvider
@@ -11,21 +10,21 @@ class LarametricsServiceProvider extends ServiceProvider
     public function boot()
     {
         if (method_exists($this, 'loadMigrationsFrom')) {
-            $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
+            $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
         } else {
             $this->publishes([
-                __DIR__ . '/database/migrations/' => database_path('migrations'),
+                __DIR__ . '/../database/migrations/' => database_path('migrations'),
             ], 'migrations');
         }
 
         $this->publishes([
-            __DIR__ . '/config/larametrics.php' => config_path('larametrics.php'),
+            __DIR__ . '/../config/larametrics.php' => config_path('larametrics.php'),
         ]);
 
-        $this->loadViewsFrom(__DIR__ . '/resources/views', 'larametrics');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'larametrics');
 
         $this->publishes([
-            __DIR__ . '/resources/assets' => public_path('vendor/larametrics'),
+            __DIR__ . '/../resources/assets' => public_path('vendor/larametrics'),
         ], 'public');
     }
 
@@ -37,9 +36,7 @@ class LarametricsServiceProvider extends ServiceProvider
             return new Larametrics();
         });
 
-        $this->app->register('Aschmelyun\Larametrics\LarametricsModelServiceProvider');
-        $this->app->register('Aschmelyun\Larametrics\LarametricsRouteServiceProvider');
-        $this->app->register('Aschmelyun\Larametrics\LarametricsLogServiceProvider');
+        $this->app->register('Aschmelyun\Larametrics\LarametricsEventsServiceProvider');
 
         $this->app->alias(Larametrics::class, 'larametrics');
     }

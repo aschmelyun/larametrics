@@ -36,7 +36,7 @@
                                                     }
                                                 }
                                             }
-                                            echo htmlspecialchars($char);
+                                            echo $char;
                                         }
                                     @endphp
                                 </pre>
@@ -56,7 +56,7 @@
                                                     }
                                                 }
                                             }
-                                            echo htmlspecialchars($char);
+                                            echo $char;
                                         }
                                     @endphp
                                 </pre>
@@ -65,7 +65,7 @@
                     @endforeach
                     <div class="row mt-4">
                         <div class="col-sm-12">
-                            <a href="{{ route('larametrics::models.revert', $model->id) }}" class="btn btn-secondary btn-sm">Revert Change</a>
+                            <a href="{{ route('larametrics::models.revert', $model->id) }}" class="btn btn-secondary btn-sm" onclick="return confirm('Are you sure you want to perform this action?')">Revert Change</a>
                         </div>
                     </div>
                 </div>
@@ -91,7 +91,7 @@
                     @endforeach
                     <div class="row mt-4">
                         <div class="col-sm-12">
-                            <a href="{{ route('larametrics::models.revert', $model->id) }}" class="btn btn-secondary btn-sm">Revert Change</a>
+                            <a href="{{ route('larametrics::models.revert', $model->id) }}" class="btn btn-secondary btn-sm" onclick="return confirm('Are you sure you want to perform this action?')">Revert Change</a>
                         </div>
                     </div>
                 </div>

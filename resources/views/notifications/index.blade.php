@@ -65,6 +65,7 @@
                                 <option value="email">Email</option>
                                 <option value="slack">Slack</option>
                                 <option value="email_slack">Email + Slack</option>
+                                <option value="webhook">Custom Webhook</option>
                             </select>
                         </div>
                     </div>

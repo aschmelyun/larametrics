@@ -8,6 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Aschmelyun\Larametrics\Models\LarametricsLog;
+use Aschmelyun\Larametrics\Channels\WebhookChannel;
 
 class LogWritten extends Notification implements ShouldQueue
 {
@@ -72,7 +73,12 @@ class LogWritten extends Notification implements ShouldQueue
             case 'email_slack':
                 return ['mail', 'slack'];
             break;
+            case 'webhook':
+                return [WebhookChannel::class];
+            break;
         }
+
+        return [];
     }
 
     /**
@@ -93,19 +99,6 @@ class LogWritten extends Notification implements ShouldQueue
             if(in_array($this->requestInfo['level'], $childLevels)) {
                 $status = $triggerLevel;
             }
-        }
-
-        $fields = array(
-            'Level' => $this->requestInfo['level'],
-            'Message' => $this->requestInfo['message']
-        );
-
-        if($this->requestInfo['user_id']) {
-            $fields['User ID'] = $this->requestInfo['user_id'];
-        }
-
-        if($this->requestInfo['email']) {
-            $fields['Associated Email'] = $this->requestInfo['email'];
         }
 
         $statusColors = array(
@@ -160,6 +153,27 @@ class LogWritten extends Notification implements ShouldQueue
                     ->content($content)
                     ->fields($fields);
             });
+    }
+
+    public function toWebhook($notifiable)
+    {
+        $content = 'A log on ' . url('/') . ' has been written to.';
+        if($notifiable->filter !== '*') {
+            $content .= " You're being notified because the log contains `" . $notifiable->filter . "`";
+        }
+
+        $status = 'success';
+        foreach($this->notificationLevels as $triggerLevel => $childLevels) {
+            if(in_array($this->requestInfo['level'], $childLevels)) {
+                $status = $triggerLevel;
+            }
+        }
+
+        return [
+            'requestInfo' => $this->requestInfo,
+            'content' => $content,
+            'status' => $status
+        ];
     }
 
     /**

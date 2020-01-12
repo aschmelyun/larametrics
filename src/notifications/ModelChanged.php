@@ -8,6 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Aschmelyun\Larametrics\Models\LarametricsModel;
+use Aschmelyun\Larametrics\Channels\WebhookChannel;
 
 class ModelChanged extends Notification implements ShouldQueue
 {
@@ -43,7 +44,12 @@ class ModelChanged extends Notification implements ShouldQueue
             case 'email_slack':
                 return ['mail', 'slack'];
             break;
+            case 'webhook':
+                return [WebhookChannel::class];
+            break;
         }
+
+        return [];
     }
 
     /**
@@ -59,7 +65,8 @@ class ModelChanged extends Notification implements ShouldQueue
             'model' => $this->larametricsModel->model,
             'method' => $this->larametricsModel->method,
             'original' => json_decode($this->larametricsModel->original, true),
-            'changes' => json_decode($this->larametricsModel->changes, true)
+            'changes' => json_decode($this->larametricsModel->changes, true),
+            'user_id' => $this->larametricsModel->user_id
         );
         $alertColor = '#ff9f00';
         switch($this->larametricsModel->method) {
@@ -86,7 +93,8 @@ class ModelChanged extends Notification implements ShouldQueue
             'id' => $this->larametricsModel->id,
             'model' => $this->larametricsModel->model,
             'original' => json_decode($this->larametricsModel->original, true),
-            'changes' => json_decode($this->larametricsModel->changes, true)
+            'changes' => json_decode($this->larametricsModel->changes, true),
+            'user_id' => $this->larametricsModel->user_id
         );
         
         switch($this->larametricsModel->method) {
@@ -120,6 +128,18 @@ class ModelChanged extends Notification implements ShouldQueue
                         });
             break;
         }
+    }
+
+    public function toWebhook($notifiable)
+    {
+        return [
+            'id' => $this->larametricsModel->id,
+            'model' => $this->larametricsModel->model,
+            'method' => $this->larametricsModel->method,
+            'original' => json_decode($this->larametricsModel->original, true),
+            'changes' => json_decode($this->larametricsModel->changes, true),
+            'user_id' => $this->larametricsModel->user_id
+        ];
     }
 
     /**
