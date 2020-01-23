@@ -24,23 +24,20 @@ class SaveRoute
 
     public function dispatch()
     {
-        app()->terminating($this->dispatchAfterTerminating());
-    }
+        app()->terminating(function() {
+            if(!$this->shouldRequestBeStored()) {
+                return false;
+            }
 
-    public function dispatchAfterTerminating()
-    {
-        if(!$this->shouldRequestBeStored()) {
-            return false;
-        }
+            $this->checkExpiredLogs();
 
-        $this->checkExpiredLogs();
+            $createdRoute = $this->createRoute();
+            if($createdRoute) {
+                $this->triggerNotifications($createdRoute);
+            }
 
-        $createdRoute = $this->createRoute();
-        if($createdRoute) {
-            $this->triggerNotifications($createdRoute);
-        }
-
-        return true;
+            return true;
+        });
     }
 
     public function shouldRequestBeStored()
