@@ -36,6 +36,10 @@ class SaveLog
     
     public function checkExpiredLogs()
     {
+        if(!config('larametrics')) {
+            return;
+        }
+
         if(config('larametrics.logsWatchedExpireDays') !== 0) {
             LarametricsLog::where('created_at', '<', Carbon::now()->subDays(config('larametrics.logsWatchedExpireDays'))->toDateTimeString())
                 ->delete();

@@ -25,6 +25,10 @@ class LarametricsEventsServiceProvider extends EventServiceProvider
     {
         parent::boot();
 
+        if(!config('larametrics')) {
+            return;
+        }
+
         foreach(config('larametrics.modelsWatched') as $model) {
             try {
                 $model::observe(new ModelObserver());
