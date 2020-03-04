@@ -42,6 +42,10 @@ class SaveRoute
 
     public function shouldRequestBeStored()
     {
+        if (!config('larametrics.requestsWatched')) {
+            return false;
+        }
+        
         $actions = $this->route ? $this->route->route->getAction() : [];
 
         if (isset($actions['controller']) && str_contains($actions['controller'], 'Larametrics')) {
