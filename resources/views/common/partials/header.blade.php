@@ -16,7 +16,7 @@
                             <a href="{{ route('larametrics::logs.index') }}" class="nav-link{{ str_contains(Request::route()->getName(), 'larametrics::logs') ? ' active' : '' }}"><i class="fe fe-file-text"></i> Logs</a>
                         </li>
                     @endif
-                    @if(count(config('larametrics.modelsWatched')) || !config('larametrics.hideUnwatchedMenuItems'))
+                    @if(is_countable(config('larametrics.modelsWatched')) && count(config('larametrics.modelsWatched')) || !config('larametrics.hideUnwatchedMenuItems'))
                         <li class="nav-item d-inline-block">
                             <a href="{{ route('larametrics::models.index') }}" class="nav-link{{ str_contains(Request::route()->getName(), 'larametrics::models') ? ' active' : '' }}"><i class="fe fe-database"></i> Models</a>
                         </li>

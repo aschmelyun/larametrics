@@ -88,7 +88,7 @@
                 </div>
             </div>
         @endif
-        @if(count(config('larametrics.modelsWatched')) || !config('larametrics.hideUnwatchedMenuItems'))
+        @if(is_countable(config('larametrics.modelsWatched')) && count(config('larametrics.modelsWatched')) || !config('larametrics.hideUnwatchedMenuItems'))
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Latest Model Changes</h3>

@@ -18,3 +18,10 @@ if (!function_exists('str_contains')) {
         return false;
     }
 }
+
+if (!function_exists('is_countable')) {
+    function is_countable($countable)
+    {
+        return is_array($countable) || $countable instanceof Countable;
+    }
+}
