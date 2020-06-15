@@ -1,5 +1,5 @@
 {
-    "name": "aschmelyun/larametrics",
+    "name": "ricardosierra/larametrics",
     "description": "A self-hosted metrics and notifications platform for Laravel apps",
     "license": "MIT",
     "authors": [
