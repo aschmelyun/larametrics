@@ -1,6 +1,6 @@
 <?php
 
-namespace Aschmelyun\Larametrics\Models;
+namespace Aschmelyun\Larametrics\models;
 
 use Illuminate\Database\Eloquent\Model;
 
