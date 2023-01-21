@@ -2,7 +2,6 @@
 
 namespace Aschmelyun\Larametrics;
 
-use Aschmelyun\Larametrics\Commands\LarametricsCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
