@@ -1,26 +1,42 @@
 {
     "name": "aschmelyun/larametrics",
-    "description": "A self-hosted metrics and notifications platform for Laravel apps",
+    "description": "Simple server-side analytics for your Laravel applications",
+    "keywords": [
+        "aschmelyun",
+        "laravel",
+        "larametrics",
+        "laravel-notifications",
+        "laravel-analytics",
+        "analytics",
+        "server-side",
+        "self-hosted"
+    ],
+    "homepage": "https://github.com/aschmelyun/larametrics",
     "license": "MIT",
     "authors": [
         {
             "name": "Andrew Schmelyun",
             "email": "me@aschmelyun.com",
-            "homepage": "https://aschmelyun.com",
             "role": "Developer"
         }
     ],
     "require": {
-        "php": "^7.0",
-        "guzzlehttp/guzzle": "^6.5"
+        "php": "^8.1",
+        "spatie/laravel-package-tools": "^1.14.0",
+        "illuminate/contracts": "^9.0"
     },
     "require-dev": {
-        "orchestra/testbench": "~3.4.0|~3.6.0|~3.7.0|~3.8.0|^4.0",
-        "phpunit/phpunit": "^6.0|^7.0|^8.0"
+        "laravel/pint": "^1.0",
+        "nunomaduro/collision": "^6.0",
+        "orchestra/testbench": "^7.0",
+        "pestphp/pest": "^1.21",
+        "pestphp/pest-plugin-laravel": "^1.1",
+        "phpunit/phpunit": "^9.5"
     },
     "autoload": {
         "psr-4": {
-            "Aschmelyun\\Larametrics\\": "src"
+            "Aschmelyun\\Larametrics\\": "src",
+            "Aschmelyun\\Larametrics\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
@@ -29,13 +45,29 @@
         }
     },
     "scripts": {
-        "test": "vendor/bin/phpunit"
+        "post-autoload-dump": "@php ./vendor/bin/testbench package:discover --ansi",
+        "analyse": "vendor/bin/phpstan analyse",
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage",
+        "format": "vendor/bin/pint"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
     },
     "extra": {
         "laravel": {
             "providers": [
                 "Aschmelyun\\Larametrics\\LarametricsServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "Larametrics": "Aschmelyun\\Larametrics\\Facades\\Larametrics"
+            }
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

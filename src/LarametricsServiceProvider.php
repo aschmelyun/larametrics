@@ -2,48 +2,23 @@
 
 namespace Aschmelyun\Larametrics;
 
-use Illuminate\Support\ServiceProvider;
+use Aschmelyun\Larametrics\Commands\LarametricsCommand;
+use Spatie\LaravelPackageTools\Package;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class LarametricsServiceProvider extends ServiceProvider
+class LarametricsServiceProvider extends PackageServiceProvider
 {
-
-    public function boot()
+    public function configurePackage(Package $package): void
     {
-        if (method_exists($this, 'loadMigrationsFrom')) {
-            $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
-        } else {
-            $this->publishes([
-                __DIR__ . '/../database/migrations/' => database_path('migrations'),
-            ], 'migrations');
-        }
-
-        $this->publishes([
-            __DIR__ . '/../config/larametrics.php' => config_path('larametrics.php'),
-        ]);
-
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'larametrics');
-
-        $this->publishes([
-            __DIR__ . '/../resources/assets' => public_path('vendor/larametrics'),
-        ], 'public');
+        /*
+         * This class is a Package Service Provider
+         *
+         * More info: https://github.com/spatie/laravel-package-tools
+         */
+        $package
+            ->name('larametrics')
+            ->hasConfigFile()
+            ->hasViews()
+            ->hasMigration('create_larametrics_table');
     }
-
-    public function register()
-    {
-        require_once __DIR__ . '/helpers.php';
-
-        $this->app->singleton(Larametrics::class, function () {
-            return new Larametrics();
-        });
-
-        $this->app->register('Aschmelyun\Larametrics\LarametricsEventsServiceProvider');
-
-        $this->app->alias(Larametrics::class, 'larametrics');
-    }
-
-    public function provides()
-    {
-
-    }
-
 }
