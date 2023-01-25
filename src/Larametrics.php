@@ -6,11 +6,11 @@ use Illuminate\Support\Facades\Route;
 
 class Larametrics
 {
-    public static function routes(): void
+    public function routes(array|string $middleware = []): void
     {
-        Route::middleware(config('larametrics.middleware'))
-            ->name(config('larametrics.name_prefix'))
+        Route::middleware(['web', ...(array)$middleware])
             ->prefix(config('larametrics.prefix'))
+            ->name(config('larametrics.name_prefix'))
             ->group(__DIR__ . '/../routes/dashboard.php');
     }
 }

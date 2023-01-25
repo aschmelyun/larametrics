@@ -7,6 +7,4 @@ return [
 
     'name_prefix' => 'larametrics.',
 
-    'middleware' => ['web'],
-
 ];
