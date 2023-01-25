@@ -7,4 +7,6 @@ return [
 
     'name_prefix' => 'larametrics.',
 
+    'enable_api' => false,
+
 ];
