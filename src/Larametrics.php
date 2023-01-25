@@ -11,6 +11,6 @@ class Larametrics
         Route::middleware(config('larametrics.middleware'))
             ->name(config('larametrics.name_prefix'))
             ->prefix(config('larametrics.prefix'))
-            ->group(__DIR__ . '/../routes/dashboard.php');
+            ->group(__DIR__.'/../routes/dashboard.php');
     }
 }
