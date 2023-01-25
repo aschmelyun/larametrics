@@ -2,6 +2,4 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return 'Larametrics dashboard!';
-});
+Route::view('/', 'larametrics::dashboard');
