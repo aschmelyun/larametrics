@@ -18,6 +18,7 @@ class LarametricsServiceProvider extends PackageServiceProvider
             ->name('larametrics')
             ->hasConfigFile()
             ->hasViews()
+            ->hasAssets()
             ->hasMigration('create_larametrics_table');
     }
 }
