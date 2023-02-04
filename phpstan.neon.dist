@@ -1,0 +1,12 @@
+includes:
+    - phpstan-baseline.neon
+
+parameters:
+    level: 4
+    paths:
+        - src
+        - config
+        - database
+        - routes
+        - tests
+    tmpDir: build/phpstan
