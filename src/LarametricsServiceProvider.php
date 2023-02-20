@@ -4,6 +4,7 @@ namespace Aschmelyun\Larametrics;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Aschmelyun\Larametrics\Providers\EventServiceProvider;
 
 class LarametricsServiceProvider extends PackageServiceProvider
 {
@@ -20,5 +21,7 @@ class LarametricsServiceProvider extends PackageServiceProvider
             ->hasViews()
             ->hasAssets()
             ->hasMigration('create_larametrics_table');
+
+        $this->app->register(EventServiceProvider::class);
     }
 }
