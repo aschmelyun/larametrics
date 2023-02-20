@@ -2,9 +2,9 @@
 
 namespace Aschmelyun\Larametrics;
 
+use Aschmelyun\Larametrics\Providers\EventServiceProvider;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Aschmelyun\Larametrics\Providers\EventServiceProvider;
 
 class LarametricsServiceProvider extends PackageServiceProvider
 {
