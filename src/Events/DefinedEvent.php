@@ -6,7 +6,7 @@ class DefinedEvent
 {
     public function __construct(
         public string $name,
-        public mixed $data,
+        public ?mixed $data,
     ) {
     }
 }
