@@ -15,4 +15,6 @@ return [
         'deleted',
     ],
 
+    'unique_visits' => false,
+
 ];

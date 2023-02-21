@@ -2,4 +2,5 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'larametrics::dashboard');
+Route::view('/', 'larametrics::dashboard')
+    ->name('dashboard');
