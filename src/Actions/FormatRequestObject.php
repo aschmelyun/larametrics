@@ -24,6 +24,7 @@ class FormatRequestObject implements Action
             'route' => $event['route'],
             'user' => $event['user'],
             'is_unique' => $event['is_unique'],
+            'response_code' => $event['response']->getStatusCode(),
         ];
 
         return $next($request);
