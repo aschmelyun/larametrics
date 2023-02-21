@@ -10,3 +10,4 @@ parameters:
         - database
         - routes
     tmpDir: build/phpstan
+    checkGenericClassInNonGenericObjectType: false

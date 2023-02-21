@@ -9,4 +9,10 @@ return [
 
     'enable_api' => false,
 
+    'default_model_events' => [
+        'created',
+        'updated',
+        'deleted',
+    ],
+
 ];
