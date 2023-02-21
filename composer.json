@@ -36,6 +36,9 @@
         "phpunit/phpunit": "^9.5"
     },
     "autoload": {
+        "files": [
+            "src/Support/helpers.php"
+        ],
         "psr-4": {
             "Aschmelyun\\Larametrics\\": "src",
             "Aschmelyun\\Larametrics\\Database\\Factories\\": "database/factories"

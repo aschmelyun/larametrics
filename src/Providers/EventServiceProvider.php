@@ -2,7 +2,9 @@
 
 namespace Aschmelyun\Larametrics\Providers;
 
+use Aschmelyun\Larametrics\Events\DefinedEvent;
 use Aschmelyun\Larametrics\Events\ModelChanged;
+use Aschmelyun\Larametrics\Listeners\RecordDefinedEvent;
 use Aschmelyun\Larametrics\Listeners\RecordModelChanged;
 use Aschmelyun\Larametrics\Listeners\RecordRequestHandled;
 use Illuminate\Foundation\Http\Events\RequestHandled;
@@ -16,6 +18,9 @@ class EventServiceProvider extends LaravelEventServiceProvider
         ],
         ModelChanged::class => [
             RecordModelChanged::class,
+        ],
+        DefinedEvent::class => [
+            RecordDefinedEvent::class,
         ],
     ];
 }
