@@ -2,11 +2,11 @@
 
 namespace Aschmelyun\Larametrics\Listeners;
 
-use Aschmelyun\Larametrics\Events\ModelChanged as EventModelChanged;
+use Aschmelyun\Larametrics\Events\ModelChanged;
 
-class ModelChanged
+class RecordModelChanged
 {
-    public function handle(EventModelChanged $event): void
+    public function handle(ModelChanged $event): void
     {
         // Run an actions pipeline to collect and format model change data
     }

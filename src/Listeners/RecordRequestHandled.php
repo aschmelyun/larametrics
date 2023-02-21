@@ -2,11 +2,11 @@
 
 namespace Aschmelyun\Larametrics\Listeners;
 
-use Illuminate\Foundation\Http\Events\RequestHandled as LaravelRequestHandled;
+use Illuminate\Foundation\Http\Events\RequestHandled;
 
-class RequestHandled
+class RecordRequestHandled
 {
-    public function handle(LaravelRequestHandled $event): void
+    public function handle(RequestHandled $event): void
     {
         // Run an actions pipeline to collect and format request data
     }
