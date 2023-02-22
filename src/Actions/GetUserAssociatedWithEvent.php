@@ -4,7 +4,7 @@ namespace Aschmelyun\Larametrics\Actions;
 
 use Aschmelyun\Larametrics\Contracts\Action;
 
-class GetUserAssociatedWithRequest implements Action
+class GetUserAssociatedWithEvent implements Action
 {
     /**
      * @param  array<mixed>  $event

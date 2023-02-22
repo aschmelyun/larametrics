@@ -5,7 +5,7 @@ namespace Aschmelyun\Larametrics\Listeners;
 use Aschmelyun\Larametrics\Actions\DetermineUniquenessOfVisit;
 use Aschmelyun\Larametrics\Actions\FormatRequestObject;
 use Aschmelyun\Larametrics\Actions\GetRouteFromRequest;
-use Aschmelyun\Larametrics\Actions\GetUserAssociatedWithRequest;
+use Aschmelyun\Larametrics\Actions\GetUserAssociatedWithEvent;
 use Illuminate\Foundation\Http\Events\RequestHandled;
 use Illuminate\Pipeline\Pipeline;
 
@@ -21,7 +21,7 @@ class RecordRequestHandled
             ])
             ->through([
                 GetRouteFromRequest::class,
-                GetUserAssociatedWithRequest::class,
+                GetUserAssociatedWithEvent::class,
                 DetermineUniquenessOfVisit::class,
                 FormatRequestObject::class,
             ])
