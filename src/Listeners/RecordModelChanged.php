@@ -2,6 +2,9 @@
 
 namespace Aschmelyun\Larametrics\Listeners;
 
+use Aschmelyun\Larametrics\Actions\AttachRequestToEvent;
+use Aschmelyun\Larametrics\Actions\CollectChangesBetweenStates;
+use Aschmelyun\Larametrics\Actions\FormatDatabaseChangeObject;
 use Aschmelyun\Larametrics\Actions\GetUserAssociatedWithEvent;
 use Aschmelyun\Larametrics\Events\ModelChanged;
 use Illuminate\Pipeline\Pipeline;
@@ -17,7 +20,10 @@ class RecordModelChanged
                 'event' => $event->event,
             ])
             ->through([
+                CollectChangesBetweenStates::class,
                 GetUserAssociatedWithEvent::class,
+                AttachRequestToEvent::class,
+                FormatDatabaseChangeObject::class,
             ])
             ->thenReturn();
     }
