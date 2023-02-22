@@ -2,12 +2,23 @@
 
 namespace Aschmelyun\Larametrics\Listeners;
 
+use Aschmelyun\Larametrics\Actions\GetUserAssociatedWithEvent;
 use Aschmelyun\Larametrics\Events\ModelChanged;
+use Illuminate\Pipeline\Pipeline;
 
 class RecordModelChanged
 {
     public function handle(ModelChanged $event): void
     {
         // Run an actions pipeline to collect and format model change data
+        $modelChange = app(Pipeline::class)
+            ->send([
+                'model' => $event->model,
+                'event' => $event->event,
+            ])
+            ->through([
+                GetUserAssociatedWithEvent::class,
+            ])
+            ->thenReturn();
     }
 }
