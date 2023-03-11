@@ -17,4 +17,12 @@ return [
 
     'unique_visits' => false,
 
+    'user_model' => "\App\Models\User",
+
+    'ignore_request_routes' => [
+        'larametrics*',
+        'telescope*',
+        'horizon*',
+    ],
+
 ];
