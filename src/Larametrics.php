@@ -2,6 +2,7 @@
 
 namespace Aschmelyun\Larametrics;
 
+use Aschmelyun\Larametrics\Events\DefinedEvent;
 use Illuminate\Support\Facades\Route;
 
 class Larametrics
@@ -22,5 +23,10 @@ class Larametrics
                 ->name(config('larametrics.name_prefix'))
                 ->group(__DIR__.'/../routes/api.php');
         }
+    }
+
+    public function event(string $name, mixed $data = null): void
+    {
+        event(new DefinedEvent($name, $data));
     }
 }
