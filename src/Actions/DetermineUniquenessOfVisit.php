@@ -9,7 +9,6 @@ class DetermineUniquenessOfVisit implements Action
 {
     /**
      * @param  array<mixed>  $event
-     * @param  \Closure  $next
      * @return array<mixed>
      */
     public function handle(array $event, \Closure $next): array

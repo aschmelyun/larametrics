@@ -10,7 +10,6 @@ class CollectChangesBetweenStates implements Action
 {
     /**
      * @param  array<mixed>  $event
-     * @param  \Closure  $next
      * @return array<mixed>
      */
     public function handle(array $event, \Closure $next): array
@@ -43,8 +42,6 @@ class CollectChangesBetweenStates implements Action
     }
 
     /**
-     * @param  Model  $model
-     * @param  string  $event
      * @return array<mixed>
      */
     protected function collectChanges(Model $model, string $event): array
