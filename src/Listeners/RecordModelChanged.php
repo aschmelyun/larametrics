@@ -7,6 +7,7 @@ use Aschmelyun\Larametrics\Actions\CollectChangesBetweenStates;
 use Aschmelyun\Larametrics\Actions\FormatDatabaseChangeObject;
 use Aschmelyun\Larametrics\Actions\GetUserAssociatedWithEvent;
 use Aschmelyun\Larametrics\Events\ModelChanged;
+use Aschmelyun\Larametrics\Models\LarametricsEvent;
 use Illuminate\Pipeline\Pipeline;
 
 class RecordModelChanged
@@ -26,5 +27,12 @@ class RecordModelChanged
                 FormatDatabaseChangeObject::class,
             ])
             ->thenReturn();
+
+        // Save the model change to the database
+        LarametricsEvent::create([
+            'user_id' => $modelChange['user'] ? $modelChange['user']->id : null,
+            'type' => 'model',
+            'data' => $modelChange,
+        ]);
     }
 }
