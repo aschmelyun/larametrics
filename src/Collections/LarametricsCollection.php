@@ -16,4 +16,18 @@ class LarametricsCollection extends Collection
             default => 0,
         };
     }
+
+    public function top(string $key): Collection
+    {
+        return match ($key) {
+            'routes' => $this->where('type', 'request')
+                ->groupBy('data.path')
+                ->sortByDesc(fn ($request) => count($request->items))
+                ->take(5),
+            'events' => $this->where('type', 'defined')
+                ->groupBy('')
+                ->sortByDesc('created_at')->take(5),
+            default => new Collection(),
+        };
+    }
 }

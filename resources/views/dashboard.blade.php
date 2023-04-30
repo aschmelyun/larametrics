@@ -51,41 +51,15 @@
                     class="text-sm text-blue-500 underline font-medium inline-block ml-2">Paths</span></h3>
         </div>
         <div class="px-8">
-            <div class="relative mt-2">
-                <div class="absolute h-full bg-blue-500 z-0 rounded opacity-10" style="width: 46%"></div>
-                <div class="relative p-2 flex justify-between items-center">
-                    <span>/</span>
-                    <span>581</span>
+            @foreach($events->top('routes') as $path => $requests)
+                <div class="relative mt-2">
+                    <div class="absolute h-full bg-blue-500 z-0 rounded opacity-10" style="width: {{ bar_width(count($requests), $events->top('routes')->sum(fn ($r) => count($r))) }}%"></div>
+                    <div class="relative p-2 flex justify-between items-center">
+                        <span>{{ $path === '//' ? '/' : $path }}</span>
+                        <span>{{ count($requests) }}</span>
+                    </div>
                 </div>
-            </div>
-            <div class="relative mt-2">
-                <div class="absolute h-full bg-blue-500 z-0 rounded opacity-10" style="width: 18%"></div>
-                <div class="relative p-2 flex justify-between items-center">
-                    <span>/login</span>
-                    <span>224</span>
-                </div>
-            </div>
-            <div class="relative mt-2">
-                <div class="absolute h-full bg-blue-500 z-0 rounded opacity-10" style="width: 12%"></div>
-                <div class="relative p-2 flex justify-between items-center">
-                    <span>/api/users/me</span>
-                    <span>145</span>
-                </div>
-            </div>
-            <div class="relative mt-2">
-                <div class="absolute h-full bg-blue-500 z-0 rounded opacity-10" style="width: 9%"></div>
-                <div class="relative p-2 flex justify-between items-center">
-                    <span>/api/posts</span>
-                    <span>119</span>
-                </div>
-            </div>
-            <div class="relative mt-2">
-                <div class="absolute h-full bg-blue-500 z-0 rounded opacity-10" style="width: 3%"></div>
-                <div class="relative p-2 flex justify-between items-center">
-                    <span>/api/comments/create</span>
-                    <span>32</span>
-                </div>
-            </div>
+            @endforeach
             <div class="mt-2">
                 <span class="text-sm text-gray-400">View More</span>
             </div>
