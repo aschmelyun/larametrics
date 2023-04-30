@@ -22,7 +22,7 @@ class LarametricsCollection extends Collection
         return match ($key) {
             'routes' => $this->where('type', 'request')
                 ->groupBy('data.path')
-                ->sortByDesc(fn ($request) => count($request->items))
+                ->sortByDesc(fn ($request) => $request->count())
                 ->take(5),
             'events' => $this->where('type', 'defined')
                 ->groupBy('')

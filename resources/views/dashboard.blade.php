@@ -53,7 +53,7 @@
         <div class="px-8">
             @foreach($events->top('routes') as $path => $requests)
                 <div class="relative mt-2">
-                    <div class="absolute h-full bg-blue-500 z-0 rounded opacity-10" style="width: {{ bar_width(count($requests), $events->top('routes')->sum(fn ($r) => count($r))) }}%"></div>
+                    <div class="absolute h-full bg-blue-500 z-0 rounded opacity-10" style="width: {{ bar_width(count($requests), $events->top('routes')->sum(fn ($r) => $r->count())) }}%"></div>
                     <div class="relative p-2 flex justify-between items-center">
                         <span>{{ $path === '//' ? '/' : $path }}</span>
                         <span>{{ count($requests) }}</span>
