@@ -2,6 +2,7 @@
 
 namespace Aschmelyun\Larametrics\Models;
 
+use Aschmelyun\Larametrics\Collections\LarametricsCollection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -14,6 +15,14 @@ class LarametricsEvent extends Model
     protected $casts = [
         'data' => 'array',
     ];
+
+    /**
+     * @param  array<LarametricsEvent>  $models
+     */
+    public function newCollection(array $models = [])
+    {
+        return new LarametricsCollection($models);
+    }
 
     public function user(): BelongsTo|Model|null
     {
