@@ -51,12 +51,12 @@
                     class="text-sm text-blue-500 underline font-medium inline-block ml-2">Paths</span></h3>
         </div>
         <div class="px-8">
-            @foreach($events->top('routes') as $path => $requests)
+            @foreach($events->top('routes') as $route => $items)
                 <div class="relative mt-2">
-                    <div class="absolute h-full bg-blue-500 z-0 rounded opacity-10" style="width: {{ bar_width(count($requests), $events->top('routes')->sum(fn ($r) => $r->count())) }}%"></div>
+                    <div class="absolute h-full bg-blue-500 z-0 rounded opacity-10" style="width: {{ bar_width($items->count(), $events->top('routes')->sum(fn ($i) => $i->count())) }}%"></div>
                     <div class="relative p-2 flex justify-between items-center">
-                        <span>{{ $path === '//' ? '/' : $path }}</span>
-                        <span>{{ count($requests) }}</span>
+                        <span>{{ $route === '//' ? '/' : $route }}</span>
+                        <span>{{ $items->count() }}</span>
                     </div>
                 </div>
             @endforeach
@@ -70,41 +70,15 @@
             <h3 class="mb-2 font-medium text-gray-900">Top Events</h3>
         </div>
         <div class="px-8">
-            <div class="relative mt-2">
-                <div class="absolute h-full bg-blue-500 z-0 rounded opacity-10" style="width: 31%"></div>
-                <div class="relative p-2 flex justify-between items-center">
-                    <span>user.signed-in</span>
-                    <span>102</span>
+            @foreach($events->top('events') as $event => $items)
+                <div class="relative mt-2">
+                    <div class="absolute h-full bg-blue-500 z-0 rounded opacity-10" style="width: {{ bar_width($items->count(), $events->top('events')->sum(fn ($i) => $i->count())) }}%"></div>
+                    <div class="relative p-2 flex justify-between items-center">
+                        <span>{{ $event }}</span>
+                        <span>{{ $items->count() }}</span>
+                    </div>
                 </div>
-            </div>
-            <div class="relative mt-2">
-                <div class="absolute h-full bg-blue-500 z-0 rounded opacity-10" style="width: 21%"></div>
-                <div class="relative p-2 flex justify-between items-center">
-                    <span>post.created</span>
-                    <span>67</span>
-                </div>
-            </div>
-            <div class="relative mt-2">
-                <div class="absolute h-full bg-blue-500 z-0 rounded opacity-10" style="width: 14%"></div>
-                <div class="relative p-2 flex justify-between items-center">
-                    <span>comment.created</span>
-                    <span>46</span>
-                </div>
-            </div>
-            <div class="relative mt-2">
-                <div class="absolute h-full bg-blue-500 z-0 rounded opacity-10" style="width: 13%"></div>
-                <div class="relative p-2 flex justify-between items-center">
-                    <span>user.changed-password</span>
-                    <span>41</span>
-                </div>
-            </div>
-            <div class="relative mt-2">
-                <div class="absolute h-full bg-blue-500 z-0 rounded opacity-10" style="width: 12%"></div>
-                <div class="relative p-2 flex justify-between items-center">
-                    <span>api.too-many-requests-reached</span>
-                    <span>38</span>
-                </div>
-            </div>
+            @endforeach
             <div class="mt-2">
                 <span class="text-sm text-gray-400">View More</span>
             </div>
