@@ -31,4 +31,34 @@ class LarametricsCollection extends Collection
             default => new Collection(),
         };
     }
+
+    public function daily(string $key): float
+    {
+        $days = abs((int) request()->get('days', 7));
+
+        return match ($key) {
+            'requests' => floor(
+                $this->where('type', 'request')
+                    ->groupBy(fn ($item) => $item->created_at->format('Y-m-d'))
+                    ->count() / $days
+            ),
+            'unique_requests' => floor(
+                $this->where('type', 'request')
+                    ->unique('data.ip_address')
+                    ->groupBy(fn ($item) => $item->created_at->format('Y-m-d'))
+                    ->count() / $days
+            ),
+            'models' => floor(
+                $this->where('type', 'model')
+                    ->groupBy(fn ($item) => $item->created_at->format('Y-m-d'))
+                    ->count() / $days
+            ),
+            'defined' => floor(
+                $this->where('type', 'defined')
+                    ->groupBy(fn ($item) => $item->created_at->format('Y-m-d'))
+                    ->count() / $days
+            ),
+            default => 0,
+        };
+    }
 }
