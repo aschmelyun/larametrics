@@ -2,8 +2,14 @@
 
 namespace Aschmelyun\Larametrics\Collections;
 
+use Aschmelyun\Larametrics\Models\LarametricsEvent;
 use Illuminate\Database\Eloquent\Collection;
 
+/**
+ * PHPDoc showing that this collection contains LarametricsEvent models
+ *
+ * @method Collection<LarametricsEvent> where(string $key, mixed $value)
+ */
 class LarametricsCollection extends Collection
 {
     public function breakdown(string $key): int
@@ -45,7 +51,7 @@ class LarametricsCollection extends Collection
             'unique_requests' => floor(
                 $this->where('type', 'request')
                     ->unique('data.ip_address')
-                    ->groupBy(fn ($item) => $item->created_at->format('Y-m-d'))
+                    ->groupBy(fn ($item) => $item->created_at->format('Y-m-d')) // @phpstan-ignore-line
                     ->count() / $days
             ),
             'models' => floor(
@@ -59,6 +65,46 @@ class LarametricsCollection extends Collection
                     ->count() / $days
             ),
             default => 0,
+        };
+    }
+
+    public function change(string $key): string
+    {
+        $days = abs((int) request()->get('days', 7));
+
+        $daily = $this->breakdown($key);
+        $previous = LarametricsEvent::whereDate( // @phpstan-ignore-line
+            'created_at',
+            '>',
+            now()->subDays($days * 2)
+        )
+            ->whereDate(
+                'created_at',
+                '<',
+                now()->subDays($days)
+            )
+            ->get()
+            ->breakdown($key);
+
+        // Should probably refactor this so I don't have to build the entire class list here...
+        if ($previous == 0 && $daily == 0) {
+            return '<span class="inline-block mr-1 text-sm font-semibold">0%</span>';
+        }
+
+        if ($previous == 0) {
+            return '<span class="inline-block mr-1 text-sm font-semibold text-green-600">+∞%</span>';
+        }
+
+        if ($daily == 0) {
+            return '<span class="inline-block mr-1 text-sm font-semibold text-red-600">-∞%</span>';
+        }
+
+        $change = round((($daily - $previous) / $previous) * 100);
+
+        return match ($change <=> 0) {
+            1 => '<span class="inline-block mr-1 text-sm font-semibold text-green-600">+'.$change.'%</span>',
+            0 => '<span class="inline-block mr-1 text-sm font-semibold">'.$change.'%</span>',
+            default => '<span class="inline-block mr-1 text-sm font-semibold text-red-600">'.$change.'%</span>'
         };
     }
 }

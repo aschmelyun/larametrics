@@ -6,7 +6,7 @@
         <h5 class="mb-1">Requests</h5>
         <h3 class="text-xl font-semibold text-gray-900">{{ $events->breakdown('requests') }}</h3>
         <div>
-            <span class="inline-block mr-1 text-sm font-semibold text-green-600">+3.5%</span>
+            {!! $events->change('requests') !!}
             <span class="inline-block text-sm text-gray-400">Avg Daily: {{ $events->daily('requests') }}</span>
         </div>
     </div>
@@ -14,7 +14,7 @@
         <h5 class="mb-1">Unique Requests</h5>
         <h3 class="text-xl font-semibold text-gray-900">{{ $events->breakdown('unique_requests') }}</h3>
         <div>
-            <span class="inline-block mr-1 text-sm font-semibold text-green-600">+17.2%</span>
+            {!! $events->change('unique_requests') !!}
             <span class="inline-block text-sm text-gray-400">Avg Daily: {{ $events->daily('unique_requests') }}</span>
         </div>
     </div>
@@ -22,7 +22,7 @@
         <h5 class="mb-1">Model Changes</h5>
         <h3 class="text-xl font-semibold text-gray-900">{{ $events->breakdown('models') }}</h3>
         <div>
-            <span class="inline-block mr-1 text-sm font-semibold text-red-600">-12.6%</span>
+            {!! $events->change('models') !!}
             <span class="inline-block text-sm text-gray-400">Avg Daily: {{ $events->daily('models') }}</span>
         </div>
     </div>
@@ -30,7 +30,7 @@
         <h5 class="mb-1">Events</h5>
         <h3 class="text-xl font-semibold text-gray-900">{{ $events->breakdown('defined') }}</h3>
         <div>
-            <span class="inline-block mr-1 text-sm font-semibold text-green-600">+1.1%</span>
+            {!! $events->change('defined') !!}
             <span class="inline-block text-sm text-gray-400">Avg Daily: {{ $events->daily('defined') }}</span>
         </div>
     </div>

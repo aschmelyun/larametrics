@@ -6,6 +6,9 @@ use Aschmelyun\Larametrics\Collections\LarametricsCollection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @property \Illuminate\Support\Carbon|null $created_at
+ */
 class LarametricsEvent extends Model
 {
     protected $guarded = [];
