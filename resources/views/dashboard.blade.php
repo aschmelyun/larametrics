@@ -164,10 +164,10 @@
         ],
         type: 'line',
         data: {
-            labels: ["Jan 21", "Jan 22", "Jan 23", "Jan 24", "Jan 25", "Jan 26", "Jan 27", "Jan 28", "Jan 29", "Jan 30", "Jan 31", "Feb 1", "Feb 2"],
+            labels: {!! json_encode(array_keys($events->graph('requests'))) !!},
             datasets: [{
                 label: 'Requests',
-                data: [45, 10, 23, 12, 20, 30, 15, 21, 8, 34, 31, 19, 15],
+                data: {!! json_encode(array_values($events->graph('requests'))) !!},
                 backgroundColor: 'rgba(59, 130, 246, 0.5)',
                 borderColor: 'rgb(59, 130, 246)',
                 borderWidth: 1,

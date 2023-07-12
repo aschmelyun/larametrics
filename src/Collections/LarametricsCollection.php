@@ -107,4 +107,24 @@ class LarametricsCollection extends Collection
             default => '<span class="inline-block mr-1 text-sm font-semibold text-red-600">'.$change.'%</span>'
         };
     }
+
+    /**
+     * @return array<string, int>
+     */
+    public function graph(string $key): array
+    {
+        $days = abs((int) request()->get('days', 7));
+
+        $data = [];
+
+        for ($i = 0; $i < $days; $i++) {
+            $date = now()->subDays($i);
+
+            $data[$date->format('M d')] = $this->where('type', 'request')
+                ->filter(fn ($item) => $item->created_at->format('Y-m-d') == $date->format('Y-m-d'))
+                ->count();
+        }
+
+        return array_reverse($data);
+    }
 }

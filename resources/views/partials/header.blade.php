@@ -6,7 +6,6 @@
             <option value="7" @selected(request()->get('days') == 7)>Last 7 days</option>
             <option value="30" @selected(request()->get('days') == 30)>Last 30 days</option>
             <option value="90" @selected(request()->get('days') == 90)>Last 90 days</option>
-            <option value="365" @selected(request()->get('days') == 365)>Last year</option>
         </select>
     </form>
 </header>
