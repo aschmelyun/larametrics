@@ -5,6 +5,9 @@
 [![Build Status](https://img.shields.io/travis/aschmelyun/larametrics/master.svg?style=flat-square)](https://travis-ci.org/aschmelyun/larametrics)
 [![Total Downloads](https://img.shields.io/packagist/dt/aschmelyun/larametrics.svg?style=flat-square)](https://packagist.org/packages/aschmelyun/larametrics)
 
+> [!IMPORTANT]
+> This project has been archived and is currently not in active development. I recommend using [Laravel Pulse](https://pulse.laravel.com) as a fantastic production-ready package to capture requests, model changes, and application usage.
+
 A self-hosted metrics and notifications platform for Laravel apps, Larametrics records and notifies you of changes made to models, incoming requests, and messages written to the log.
 
 A full version of the docs can be found [here](https://larametrics.com/docs), below you'll find a quick 'Getting Started' guide.
